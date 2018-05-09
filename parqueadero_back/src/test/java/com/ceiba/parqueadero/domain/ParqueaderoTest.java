@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.ceiba.parqueadero.dominio.Parqueadero;
+import com.ceiba.parqueadero.dominio.Vehiculo;
+
 public class ParqueaderoTest {
 
 	@Test

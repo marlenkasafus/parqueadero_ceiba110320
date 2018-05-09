@@ -1,4 +1,4 @@
-package com.ceiba.parqueadero.domain;
+package com.ceiba.parqueadero.dominio;
 
 public class Vehiculo {
 	
