@@ -1,5 +1,7 @@
 package com.ceiba.parqueadero.servicio;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ceiba.parqueadero.controlador.ParqueaderoController;
 import com.ceiba.parqueadero.dominio.Parqueadero;
+import com.ceiba.parqueadero.dominio.Vehiculo;
+import com.ceiba.parqueadero.dominio.enums.TipoVehiculoEnum;
+import com.ceiba.parqueadero.persistencia.entidad.ParqueaderoEntity;
+import com.ceiba.parqueadero.persistencia.entidad.VehiculoEntity;
+import com.ceiba.parqueadero.persistencia.repositorio.ParqueaderoRepository;
+import com.ceiba.parqueadero.persistencia.repositorio.VehiculoRepository;
 
 @RestController
 @RequestMapping(path="/parqueadero")
@@ -17,9 +25,22 @@ public class ParqueaderoService {
 	@Autowired
 	private ParqueaderoController parqueaderoController;
 	
+	@Autowired
+	private ParqueaderoRepository parqueaderoRepository;
+	
+	@Autowired
+	private VehiculoRepository vehiculoRepository;
+	
 	@RequestMapping(method=RequestMethod.POST)
 	public @ResponseBody String registrarIngreso(@RequestBody Parqueadero parqueadero) {
-		parqueaderoController.registrarIngreso(parqueadero);
+		VehiculoEntity vehiculoEntity = new VehiculoEntity();
+		vehiculoEntity.setTipoVehiculo("C");
+		vehiculoRepository.save(vehiculoEntity);
+		ParqueaderoEntity parqueaderoEntity = new ParqueaderoEntity(null, LocalDateTime.now(), "O", vehiculoEntity, LocalDateTime.now());
+		parqueaderoRepository.save(parqueaderoEntity);
+		Vehiculo vehiculo = new Vehiculo();
+		vehiculo.setTipoVehiculoEnum(TipoVehiculoEnum.CARRO);
+		parqueaderoController.hayDisponibilidad(vehiculo);
 		return "";
 	}
 

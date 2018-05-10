@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
@@ -21,11 +23,19 @@ public class ParqueaderoEntity {
 	@NonNull
 	private LocalDateTime fechaIngreso;
 	
+	private String estado;
+	
+	@OneToOne(optional=false)
+    @JoinColumn(name = "idVehiculo") 
+	private VehiculoEntity vehiculoEntity;
+	
 	private LocalDateTime fechaSalida;
 
-	public ParqueaderoEntity(Integer id, LocalDateTime fechaIngreso, LocalDateTime fechaSalida) {
+	public ParqueaderoEntity(Integer id, LocalDateTime fechaIngreso, String estado,VehiculoEntity vehiculoEntity,LocalDateTime fechaSalida) {
 		this.id = id;
 		this.fechaIngreso = fechaIngreso;
+		this.estado = estado;
+		this.vehiculoEntity = vehiculoEntity;
 		this.fechaSalida = fechaSalida;
 	}
 
@@ -45,6 +55,22 @@ public class ParqueaderoEntity {
 		this.fechaIngreso = fechaIngreso;
 	}
 
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
+	public VehiculoEntity getVehiculoEntity() {
+		return vehiculoEntity;
+	}
+
+	public void setVehiculoEntity(VehiculoEntity vehiculoEntity) {
+		this.vehiculoEntity = vehiculoEntity;
+	}
+
 	public LocalDateTime getFechaSalida() {
 		return fechaSalida;
 	}
@@ -52,6 +78,4 @@ public class ParqueaderoEntity {
 	public void setFechaSalida(LocalDateTime fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
-
-	
 }

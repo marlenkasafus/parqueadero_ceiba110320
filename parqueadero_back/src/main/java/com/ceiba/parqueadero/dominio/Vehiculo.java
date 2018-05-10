@@ -1,17 +1,17 @@
 package com.ceiba.parqueadero.dominio;
 
+import com.ceiba.parqueadero.dominio.enums.TipoVehiculoEnum;
+
 public class Vehiculo {
 	
-	private String placa;
+	private TipoVehiculoEnum tipoVehiculoEnum;
 
-	public Vehiculo(String placa) {
-		this.placa = placa;
+	public TipoVehiculoEnum getTipoVehiculoEnum() {
+		return tipoVehiculoEnum;
 	}
 
-	public String getPlaca() {
-		return placa;
+	public void setTipoVehiculoEnum(TipoVehiculoEnum tipoVehiculoEnum) {
+		this.tipoVehiculoEnum = tipoVehiculoEnum;
 	}
 	
-	
-
 }
