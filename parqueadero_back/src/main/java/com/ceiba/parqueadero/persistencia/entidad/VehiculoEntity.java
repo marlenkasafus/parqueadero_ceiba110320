@@ -18,6 +18,8 @@ public class VehiculoEntity {
 	
 	private String tipoVehiculo;
 	
+	private String placa;
+	
 	 @OneToOne(optional=false,cascade=CascadeType.ALL, 
 		       mappedBy="vehiculoEntity",targetEntity=ParqueaderoEntity.class)
 	private ParqueaderoEntity parqueaderoEntity;
@@ -36,6 +38,14 @@ public class VehiculoEntity {
 
 	public void setTipoVehiculo(String tipoVehiculo) {
 		this.tipoVehiculo = tipoVehiculo;
+	}
+
+	public String getPlaca() {
+		return placa;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
 	}
 
 	public ParqueaderoEntity getParqueaderoEntity() {

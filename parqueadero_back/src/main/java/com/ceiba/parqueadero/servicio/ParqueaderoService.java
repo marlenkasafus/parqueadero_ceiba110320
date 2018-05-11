@@ -15,8 +15,8 @@ import com.ceiba.parqueadero.dominio.Vehiculo;
 import com.ceiba.parqueadero.dominio.enums.TipoVehiculoEnum;
 import com.ceiba.parqueadero.persistencia.entidad.ParqueaderoEntity;
 import com.ceiba.parqueadero.persistencia.entidad.VehiculoEntity;
-import com.ceiba.parqueadero.persistencia.repositorio.ParqueaderoRepository;
-import com.ceiba.parqueadero.persistencia.repositorio.VehiculoRepository;
+import com.ceiba.parqueadero.persistencia.repositorio.jpa.ParqueaderoRepositoryJPA;
+import com.ceiba.parqueadero.persistencia.repositorio.jpa.VehiculoRepositoryJPA;
 
 @RestController
 @RequestMapping(path="/parqueadero")
@@ -26,10 +26,10 @@ public class ParqueaderoService {
 	private ParqueaderoController parqueaderoController;
 	
 	@Autowired
-	private ParqueaderoRepository parqueaderoRepository;
+	private ParqueaderoRepositoryJPA parqueaderoRepository;
 	
 	@Autowired
-	private VehiculoRepository vehiculoRepository;
+	private VehiculoRepositoryJPA vehiculoRepository;
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public @ResponseBody String registrarIngreso(@RequestBody Parqueadero parqueadero) {
