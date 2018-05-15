@@ -63,7 +63,7 @@ public class CalendarioTest {
 			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO));
 			fail();
 		} catch (CalendarioException e) {
-			assertEquals("No puede ingresar porque no est· en un dia h·bil",  e.getMessage());
+			assertEquals("No puede ingresar porque no est√° en un dia h√°bil",  e.getMessage());
 		}
 	}
 	
@@ -74,7 +74,7 @@ public class CalendarioTest {
 			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO));
 			fail();
 		} catch (CalendarioException e) {
-			assertEquals("No puede ingresar porque no est· en un dia h·bil",  e.getMessage());
+			assertEquals("No puede ingresar porque no est√° en un dia h√°bil",  e.getMessage());
 		}
 	}
 	
@@ -86,7 +86,7 @@ public class CalendarioTest {
 			celador.solicitudIngresoVehiculo(vehiculo);
 			fail();
 		} catch (CalendarioException e) {
-			assertEquals("No puede ingresar porque no est· en un dia h·bil",  e.getMessage());
+			assertEquals("No puede ingresar porque no est√° en un dia h√°bil",  e.getMessage());
 		}	
 	}
 

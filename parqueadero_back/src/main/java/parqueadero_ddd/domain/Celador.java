@@ -31,7 +31,6 @@ public class Celador {
 	}
 
 	public ParqueaderoPOJO solicitudIngresoVehiculo(Vehiculo vehiculo) throws CeladorException, CalendarioException {
-		calendario.setFechaActual(LocalDateTime.now());
 		hayEspaciosDisponibles(vehiculo.getTipoVehiculoEnum());
 		calendario.esDiaHabilParaVehiculo(vehiculo);
 		return generarIngresoVehiculo(vehiculo);

@@ -18,12 +18,6 @@ public class Calendario {
 	
 	private LocalDateTime fechaActual;
 	
-	public Calendario() {
-		fechaActual = LocalDateTime.now();
-	}
-	
-	
-
 	public LocalDateTime getFechaActual() {
 		return fechaActual;
 	}
@@ -43,7 +37,7 @@ public class Calendario {
 			int diaSemana = obtenerDiaActual();
 			for (RestriccionPlaca restriccionPlaca : restriccionPlacas) {
 				if (restriccionPlaca.getCaracterPlaca()==caracterPlacaVehiculo && restriccionPlaca.getDiasDeLaSemana().contains(diaSemana)) {
-					throw new CalendarioException("No puede ingresar porque no est· en un dia h·bil");
+					throw new CalendarioException("No puede ingresar porque no est√° en un dia h√°bil");
 				}
 			}			
 		}
