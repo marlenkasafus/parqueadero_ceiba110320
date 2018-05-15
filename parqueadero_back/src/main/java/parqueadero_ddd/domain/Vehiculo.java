@@ -13,13 +13,16 @@ public class Vehiculo {
 	
 	private TipoVehiculoEnum tipoVehiculoEnum;
 	
+	private int cilindraje;
+	
 	public Vehiculo() {
 		
 	}
 	
-	public Vehiculo(String placa,TipoVehiculoEnum tipoVehiculoEnum) {
+	public Vehiculo(String placa,TipoVehiculoEnum tipoVehiculoEnum, int cilindraje) {
 		this.placa = placa;
 		this.tipoVehiculoEnum = tipoVehiculoEnum;
+		this.cilindraje = cilindraje;
 	}
 
 	public char obtenerCaracterInicialPlaca() {
@@ -32,6 +35,16 @@ public class Vehiculo {
 
 	public String getPlaca() {
 		return placa;
+	}
+	
+	
+
+	public int getCilindraje() {
+		return cilindraje;
+	}
+
+	public void setCilindraje(int cilindraje) {
+		this.cilindraje = cilindraje;
 	}
 
 	public String toJson() throws JsonProcessingException {

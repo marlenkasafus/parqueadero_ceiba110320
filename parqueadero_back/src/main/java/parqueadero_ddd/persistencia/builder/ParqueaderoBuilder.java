@@ -13,12 +13,12 @@ public class ParqueaderoBuilder {
 	}
 	
 	public static ParqueaderoEntidad convertirAParqueaderoEntidad(ParqueaderoPOJO parqueaderoPOJO) {
-		VehiculoEntidad vehiculoEntidad = new VehiculoEntidad(parqueaderoPOJO.getVehiculo().getTipoVehiculoEnum().getCodigo(),parqueaderoPOJO.getVehiculo().getPlaca());
+		VehiculoEntidad vehiculoEntidad = new VehiculoEntidad(parqueaderoPOJO.getVehiculo().getTipoVehiculoEnum().getCodigo(),parqueaderoPOJO.getVehiculo().getPlaca(),parqueaderoPOJO.getVehiculo().getCilindraje());
 		return new ParqueaderoEntidad(vehiculoEntidad, parqueaderoPOJO.getEstadoParqueaderoEnum().getCodigo(),parqueaderoPOJO.getFechaIngreso());
 	}
 
 	public static ParqueaderoPOJO convertirAParqueaderoPOJO(ParqueaderoEntidad parqueaderoEntidad) {
-		Vehiculo vehiculo = new Vehiculo(parqueaderoEntidad.getVehiculo().getPlaca(), TipoVehiculoEnum.getByCodigo(parqueaderoEntidad.getVehiculo().getTipo()));
+		Vehiculo vehiculo = new Vehiculo(parqueaderoEntidad.getVehiculo().getPlaca(), TipoVehiculoEnum.getByCodigo(parqueaderoEntidad.getVehiculo().getTipo()),parqueaderoEntidad.getVehiculo().getCilindraje());
 		return new ParqueaderoPOJO(vehiculo, parqueaderoEntidad.getFechaIngreso());
 	}
 

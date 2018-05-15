@@ -35,7 +35,7 @@ public class CeladorServiceTest {
 	 @Ignore
 	@Test
 	public void servicioRestRealizarIngresoExitoso() throws Exception {
-		Vehiculo vehiculo = new Vehiculo("ASD123", TipoVehiculoEnum.CARRO);
+		Vehiculo vehiculo = new Vehiculo("ASD123", TipoVehiculoEnum.CARRO,0);
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
 				.post("/celador/ingreso")
 				.accept(MediaType.APPLICATION_JSON)

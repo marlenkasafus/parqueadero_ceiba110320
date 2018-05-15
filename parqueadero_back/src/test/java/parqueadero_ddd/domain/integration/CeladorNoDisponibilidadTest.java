@@ -40,12 +40,12 @@ public class CeladorNoDisponibilidadTest {
 	@Before
 	public void setup() {
 		for (int i = 0; i < 10; i++) {
-			ParqueaderoEntidad parqueaderoEntidad = new ParqueaderoEntidad(new VehiculoEntidad(TipoVehiculoEnum.CARRO.getCodigo(), "ASD123"),EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now());
+			ParqueaderoEntidad parqueaderoEntidad = new ParqueaderoEntidad(new VehiculoEntidad(TipoVehiculoEnum.CARRO.getCodigo(), "ASD123",0),EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now());
 			parqueaderoRepositorio.saveAndFlush(parqueaderoEntidad);			
 		}
 		
 		for (int i = 0; i < 5; i++) {
-			ParqueaderoEntidad parqueaderoEntidad = new ParqueaderoEntidad(new VehiculoEntidad(TipoVehiculoEnum.MOTO.getCodigo(), "ASD123"),EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now());
+			ParqueaderoEntidad parqueaderoEntidad = new ParqueaderoEntidad(new VehiculoEntidad(TipoVehiculoEnum.MOTO.getCodigo(), "ASD123",0),EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now());
 			parqueaderoRepositorio.saveAndFlush(parqueaderoEntidad);			
 		}
 	}
@@ -63,7 +63,7 @@ public class CeladorNoDisponibilidadTest {
 	@Test
 	public void realizarIngresoCarroNoDisponibilidad() throws CalendarioException {
 		try {
-			Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.CARRO);
+			Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.CARRO,0);
 			celador.solicitudIngresoVehiculo(vehiculo);
 			fail();
 		} catch (CeladorException e) {
@@ -84,7 +84,7 @@ public class CeladorNoDisponibilidadTest {
 	@Test
 	public void realizarIngresoMotoNoDisponibilidad() throws CalendarioException {
 		try {
-			Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.MOTO);
+			Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.MOTO,0);
 			celador.solicitudIngresoVehiculo(vehiculo);
 			fail();
 		} catch (CeladorException e) {

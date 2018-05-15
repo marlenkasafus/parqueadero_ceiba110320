@@ -50,7 +50,7 @@ public class CalendarioTest {
 		Mockito.when(restriccionPlacaRepositorio.findAll()).thenReturn(restriccionPlacas);
 		try {
 			calendario.setFechaActual(LocalDateTime.of(2018, 05, 7, 9, 32));
-			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO));
+			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO,0));
 			fail();
 		} catch (CalendarioException e) {
 			assertEquals("No puede ingresar porque no está en un dia hábil",  e.getMessage());
@@ -66,7 +66,7 @@ public class CalendarioTest {
 		Mockito.when(restriccionPlacaRepositorio.findAll()).thenReturn(restriccionPlacas);
 		try {
 			calendario.setFechaActual(LocalDateTime.of(2018, 05, 6, 9, 32));
-			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO));
+			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO,0));
 			fail();
 		} catch (CalendarioException e) {
 			assertEquals("No puede ingresar porque no está en un dia hábil",  e.getMessage());

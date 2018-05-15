@@ -20,18 +20,25 @@ public class VehiculoEntidad {
 	
 	@Column(name="placa")
 	private String placa;
+	
+	@Column(name="cilindraje")
+	private int cilindraje;
 
 	public VehiculoEntidad() {
 	}
-	public VehiculoEntidad(String tipo,String placa) {
+	public VehiculoEntidad(String tipo,String placa, int cilindraje) {
 		this.tipo = tipo;
 		this.placa = placa;
+		this.cilindraje = cilindraje;
 	}
 	public String getTipo() {
 		return tipo;
 	}
 	public String getPlaca() {
 		return placa;
+	}
+	public int getCilindraje() {
+		return cilindraje;
 	}
 	
 	

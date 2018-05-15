@@ -58,7 +58,7 @@ public class CalendarioTest {
 	public void noEsDiaHabilCarroPlacaADiaLunes() {
 		try {
 			calendario.setFechaActual(LocalDateTime.of(2018, 05, 7, 9, 32));
-			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO));
+			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO,0));
 			fail();
 		} catch (CalendarioException e) {
 			assertEquals("No puede ingresar porque no está en un dia hábil",  e.getMessage());
@@ -69,7 +69,7 @@ public class CalendarioTest {
 	public void noEsDiaHabilCarroPlacaADiaDomingo() {
 		try {
 			calendario.setFechaActual(LocalDateTime.of(2018, 05, 6, 9, 32));
-			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO));
+			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO,0));
 			fail();
 		} catch (CalendarioException e) {
 			assertEquals("No puede ingresar porque no está en un dia hábil",  e.getMessage());
@@ -79,7 +79,7 @@ public class CalendarioTest {
 	@Test
 	public void realizarIngresoCarroDiaNoHabil() throws CeladorException  {
 		try {
-			Vehiculo vehiculo = new Vehiculo("AZD123", TipoVehiculoEnum.CARRO);
+			Vehiculo vehiculo = new Vehiculo("AZD123", TipoVehiculoEnum.CARRO,0);
 			calendario.setFechaActual(LocalDateTime.of(2018, 05, 6, 9, 32));
 			celador.solicitudIngresoVehiculo(vehiculo);
 			fail();

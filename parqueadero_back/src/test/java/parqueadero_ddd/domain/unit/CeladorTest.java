@@ -74,7 +74,7 @@ public class CeladorTest {
 		restriccionPlacas.add(new RestriccionPlaca('A', diasSemana));
 		Mockito.when(restriccionPlacaRepositorio.findAll()).thenReturn(restriccionPlacas);
 		try {
-			Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.MOTO);
+			Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.MOTO,0);
 			Mockito.when(parqueadero.getCantidadCupos(TipoVehiculoEnum.MOTO)).thenReturn(10);
 			Mockito.when(parqueadero.getCantidadCeldasEnUso(TipoVehiculoEnum.MOTO)).thenReturn(10);
 			calendario.setFechaActual(LocalDateTime.of(2018, 05, 7, 9, 32));
@@ -84,5 +84,4 @@ public class CeladorTest {
 			assertEquals("No hay celdas disponibles.", e.getMessage());
 		}
 	}
-
 }

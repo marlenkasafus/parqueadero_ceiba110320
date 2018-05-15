@@ -34,7 +34,7 @@ public class CeladorTest {
 	
 	@Test
 	public void realizarIngresoExitoso() throws CeladorException, CalendarioException {
-		Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.MOTO);
+		Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.MOTO,0);
 		celador.solicitudIngresoVehiculo(vehiculo);
 		
 		List<ParqueaderoEntidad> parqueaderoEntidads = parqueaderoRepositorioJPA.findAll();

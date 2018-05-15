@@ -1,5 +1,7 @@
 package parqueadero_ddd.domain;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +40,12 @@ public class Celador {
 		ParqueaderoPOJO parqueaderoPOJO = new ParqueaderoPOJO(vehiculo, calendario.getFechaActual());
 		return parqueaderoRepositorio.realizarIngreso(parqueaderoPOJO);
 	}
+
 	
+
+	public BigDecimal calcularValorParqueo(ParqueaderoPOJO parqueaderoPOJO) {
+		return parqueaderoPOJO.getTicket().generarCobro(parqueaderoPOJO);
+	}
 	
 
 }
