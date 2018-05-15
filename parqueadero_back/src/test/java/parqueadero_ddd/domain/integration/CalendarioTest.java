@@ -4,13 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
@@ -22,14 +21,13 @@ import parqueadero_ddd.domain.Vehiculo;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.exception.CalendarioException;
 import parqueadero_ddd.exception.CeladorException;
-import parqueadero_ddd.persistencia.entidad.RestriccionPlacaEntidad;
-import parqueadero_ddd.persistencia.repositorio.jpa.RestriccionPlacaRepositorioJPA;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @DataJpaTest
 @TestPropertySource("classpath:parqueaderotest.properties")
+@EnableAutoConfiguration(exclude=FlywayAutoConfiguration.class)
 public class CalendarioTest {
 	
 	@Autowired
@@ -38,23 +36,23 @@ public class CalendarioTest {
 	@Autowired
 	private Celador celador;
 	
-	@Autowired
-	private RestriccionPlacaRepositorioJPA restriccionPlacaRepositorioJPA;
-	
-	@Before
-	public void setup() {
-		List<Integer> diasLunesSemana = new ArrayList<>();
-		diasLunesSemana.add(1);
-		RestriccionPlacaEntidad restriccionPlacaEntidadDiaLunes = new RestriccionPlacaEntidad('A',diasLunesSemana);
-		restriccionPlacaRepositorioJPA.save(restriccionPlacaEntidadDiaLunes);
-		
-		List<Integer> diasDomingoSemana = new ArrayList<>();
-		diasDomingoSemana.add(7);
-		RestriccionPlacaEntidad restriccionPlacaEntidadDiaDomingo = new RestriccionPlacaEntidad('A',diasDomingoSemana);
-		restriccionPlacaRepositorioJPA.save(restriccionPlacaEntidadDiaDomingo);
-		
-		
-	}
+//	@Autowired
+//	private RestriccionPlacaRepositorioJPA restriccionPlacaRepositorioJPA;
+////	
+//	@Before//TODO:: Error
+//	public void setup() {
+//		List<Integer> diasLunesSemana = new ArrayList<>();
+//		diasLunesSemana.add(1);
+//		RestriccionPlacaEntidad restriccionPlacaEntidadDiaLunes = new RestriccionPlacaEntidad('A',diasLunesSemana);
+//		restriccionPlacaRepositorioJPA.save(restriccionPlacaEntidadDiaLunes);
+//		
+//		List<Integer> diasDomingoSemana = new ArrayList<>();
+//		diasDomingoSemana.add(7);
+//		RestriccionPlacaEntidad restriccionPlacaEntidadDiaDomingo = new RestriccionPlacaEntidad('A',diasDomingoSemana);
+//		restriccionPlacaRepositorioJPA.save(restriccionPlacaEntidadDiaDomingo);
+//		
+//		
+//	}
 
 	@Test
 	public void noEsDiaHabilCarroPlacaADiaLunes() {
