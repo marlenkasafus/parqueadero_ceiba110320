@@ -15,7 +15,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jacoco'
 
 bootJar {
-    baseName = 'parqueadero_ceiba'
+    baseName = 'parqueadero_ceiba_ddd'
     version = '0.1.0'
 }
 
