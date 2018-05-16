@@ -37,7 +37,7 @@ public class Celador {
 	}
 
 	private ParqueaderoPOJO  generarIngresoVehiculo(Vehiculo vehiculo) {
-		ParqueaderoPOJO parqueaderoPOJO = new ParqueaderoPOJO(vehiculo, calendario.getFechaActual());
+		ParqueaderoPOJO parqueaderoPOJO = new ParqueaderoPOJO(null,vehiculo, calendario.getFechaActual());
 		return parqueaderoRepositorio.realizarIngreso(parqueaderoPOJO);
 	}
 

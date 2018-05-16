@@ -40,6 +40,11 @@ public class ParqueaderoEntidad {
 		this.fechaIngreso = fechaIngreso;
 	}
 
+	
+	public Integer getId() {
+		return id;
+	}
+
 	public VehiculoEntidad getVehiculo() {
 		return vehiculo;
 	}

@@ -19,7 +19,7 @@ public class ParqueaderoBuilder {
 
 	public static ParqueaderoPOJO convertirAParqueaderoPOJO(ParqueaderoEntidad parqueaderoEntidad) {
 		Vehiculo vehiculo = new Vehiculo(parqueaderoEntidad.getVehiculo().getPlaca(), TipoVehiculoEnum.getByCodigo(parqueaderoEntidad.getVehiculo().getTipo()),parqueaderoEntidad.getVehiculo().getCilindraje());
-		return new ParqueaderoPOJO(vehiculo, parqueaderoEntidad.getFechaIngreso());
+		return new ParqueaderoPOJO(parqueaderoEntidad.getId(),vehiculo, parqueaderoEntidad.getFechaIngreso());
 	}
 
 }
