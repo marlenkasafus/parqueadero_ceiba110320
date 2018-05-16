@@ -1,5 +1,6 @@
 package parqueadero_ddd.persistencia.repositorio;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,9 @@ public class ParqueaderoRepositorio {
 	public ParqueaderoPOJO findById(Integer id) {
 		Optional<ParqueaderoEntidad> optionalParqueaderoEntidad = parqueaderoRepositorioJPA.findById(id);
 		return optionalParqueaderoEntidad.isPresent()?ParqueaderoBuilder.convertirAParqueaderoPOJO(optionalParqueaderoEntidad.get()):null;
+	}
+
+	public List<ParqueaderoPOJO> getParqueaderosEnUso() {
+		return ParqueaderoBuilder.convertirAParqueaderosPOJO(parqueaderoRepositorioJPA.findAllEstadoOcupado(EstadoParqueaderoEnum.OCUPADO.getCodigo()));
 	}
 }

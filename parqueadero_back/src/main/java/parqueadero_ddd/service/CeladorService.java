@@ -1,6 +1,7 @@
 package parqueadero_ddd.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,6 +55,12 @@ public class CeladorService {
 	public ResponseEntity<ParqueaderoPOJO> registrarRetiroVehiculo(@RequestBody ParqueaderoPOJO parqueaderoPOJORequest){
 		ParqueaderoPOJO parqueaderoPOJO;
 			parqueaderoPOJO = celador.registrarRetiro(parqueaderoPOJORequest);
+		return new ResponseEntity<>(parqueaderoPOJO, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/vehiculos/actuales",method=RequestMethod.GET)
+	public ResponseEntity<List<ParqueaderoPOJO>> vehiculosExistentes(){
+		List<ParqueaderoPOJO> parqueaderoPOJO = celador.consultarParqueaderosEnUso();
 		return new ResponseEntity<>(parqueaderoPOJO, HttpStatus.OK);
 	}
 	

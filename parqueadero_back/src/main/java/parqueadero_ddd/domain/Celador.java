@@ -1,6 +1,7 @@
 package parqueadero_ddd.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,10 @@ public class Celador {
 
 	public void calcularValorParqueo(ParqueaderoPOJO parqueaderoPOJO) {
 		parqueaderoPOJO.setValorPagar(parqueaderoPOJO.getTicket().generarCobro(parqueaderoPOJO));
+	}
+	
+	public List<ParqueaderoPOJO> consultarParqueaderosEnUso(){
+		return parqueaderoRepositorio.getParqueaderosEnUso();
 	}
 	
 
