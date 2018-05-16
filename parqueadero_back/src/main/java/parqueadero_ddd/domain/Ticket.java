@@ -9,7 +9,7 @@ public abstract class Ticket {
 	static final int MINUTES_PER_HOUR = 60;
 	static final int SECONDS_PER_MINUTE = 60;
 	static final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
-	
+
 	public long calcularTiempoParqueo(ParqueaderoPOJO parqueaderoPOJO) {
 		return getTime(parqueaderoPOJO.getFechaIngreso(), parqueaderoPOJO.getFechaSalida());
 	}

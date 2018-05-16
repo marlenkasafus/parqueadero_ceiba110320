@@ -38,5 +38,25 @@ public class CeladorService {
 		}
 		return new ResponseEntity<>(parqueaderoPOJO, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/retiro/solicitud",method=RequestMethod.GET)
+	public ResponseEntity<?> solicitudRetiroVehiculo(ParqueaderoPOJO parqueaderoPOJORequest){
+		ParqueaderoPOJO parqueaderoPOJO;
+		try {
+			parqueaderoPOJO = celador.solicitudRetiroVehiculo(parqueaderoPOJORequest, LocalDateTime.now());
+		} catch (CeladorException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<>(parqueaderoPOJO, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/retiro/solicitud",method=RequestMethod.PUT)
+	public ResponseEntity<ParqueaderoPOJO> registrarRetiroVehiculo(@RequestBody ParqueaderoPOJO parqueaderoPOJORequest){
+		ParqueaderoPOJO parqueaderoPOJO;
+			parqueaderoPOJO = celador.registrarRetiro(parqueaderoPOJORequest);
+		return new ResponseEntity<>(parqueaderoPOJO, HttpStatus.OK);
+	}
+	
+	
 
 }

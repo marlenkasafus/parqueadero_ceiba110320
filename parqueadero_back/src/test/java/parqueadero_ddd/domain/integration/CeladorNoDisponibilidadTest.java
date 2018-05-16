@@ -40,12 +40,12 @@ public class CeladorNoDisponibilidadTest {
 	@Before
 	public void setup() {
 		for (int i = 0; i < 10; i++) {
-			ParqueaderoEntidad parqueaderoEntidad = new ParqueaderoEntidad(new VehiculoEntidad(TipoVehiculoEnum.CARRO.getCodigo(), "ASD123",0),EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now());
+			ParqueaderoEntidad parqueaderoEntidad = new ParqueaderoEntidad(null, new VehiculoEntidad(TipoVehiculoEnum.CARRO.getCodigo(), "ASD123",0),EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now(),null,null);
 			parqueaderoRepositorio.saveAndFlush(parqueaderoEntidad);			
 		}
 		
 		for (int i = 0; i < 5; i++) {
-			ParqueaderoEntidad parqueaderoEntidad = new ParqueaderoEntidad(new VehiculoEntidad(TipoVehiculoEnum.MOTO.getCodigo(), "ASD123",0),EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now());
+			ParqueaderoEntidad parqueaderoEntidad = new ParqueaderoEntidad(null, new VehiculoEntidad(TipoVehiculoEnum.MOTO.getCodigo(), "ASD123",0),EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now(),null,null);
 			parqueaderoRepositorio.saveAndFlush(parqueaderoEntidad);			
 		}
 	}

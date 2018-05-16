@@ -3,6 +3,7 @@ package parqueadero_ddd.domain.unit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import parqueadero_ddd.domain.Calendario;
 import parqueadero_ddd.domain.Celador;
 import parqueadero_ddd.domain.Parqueadero;
+import parqueadero_ddd.domain.ParqueaderoPOJO;
 import parqueadero_ddd.domain.RestriccionPlaca;
 import parqueadero_ddd.domain.Vehiculo;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
@@ -83,5 +85,26 @@ public class CeladorTest {
 		} catch (CeladorException | CalendarioException e) {
 			assertEquals("No hay celdas disponibles.", e.getMessage());
 		}
+	}
+	
+	@Test
+	public void solicitarRetiroVehiculoNoExistente() {
+		ParqueaderoPOJO parqueaderoPOJO = new ParqueaderoPOJO();
+		Mockito.when(parqueaderoRepositorio.findById(1)).thenReturn(null);
+		try {
+		celador.solicitudRetiroVehiculo(parqueaderoPOJO,null);
+		fail();
+		} catch (CeladorException e) {
+			assertEquals("Ticket no encontrado, verifique el número e intente nuevamente", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void solicitarRetiroVehiculo() throws CeladorException {
+		Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.CARRO,0);
+		ParqueaderoPOJO parqueaderoPOJO = new ParqueaderoPOJO(1, vehiculo, LocalDateTime.of(2018, 5, 16, 7, 15),null,null,null);
+		Mockito.when(parqueaderoRepositorio.findById(1)).thenReturn(parqueaderoPOJO);
+		ParqueaderoPOJO parqueaderoPOJOretiro = celador.solicitudRetiroVehiculo(parqueaderoPOJO,LocalDateTime.of(2018, 5, 16, 9, 15));
+		assertEquals(new BigDecimal("2000"), parqueaderoPOJOretiro.getValorPagar());
 	}
 }

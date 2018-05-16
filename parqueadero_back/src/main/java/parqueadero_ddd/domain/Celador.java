@@ -1,10 +1,11 @@
 package parqueadero_ddd.domain;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import parqueadero_ddd.domain.enums.EstadoParqueaderoEnum;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.exception.CalendarioException;
 import parqueadero_ddd.exception.CeladorException;
@@ -37,14 +38,28 @@ public class Celador {
 	}
 
 	private ParqueaderoPOJO  generarIngresoVehiculo(Vehiculo vehiculo) {
-		ParqueaderoPOJO parqueaderoPOJO = new ParqueaderoPOJO(null,vehiculo, calendario.getFechaActual());
-		return parqueaderoRepositorio.realizarIngreso(parqueaderoPOJO);
+		ParqueaderoPOJO parqueaderoPOJO = new ParqueaderoPOJO(vehiculo, calendario.getFechaActual());
+		return parqueaderoRepositorio.save(parqueaderoPOJO);
 	}
 
+	public ParqueaderoPOJO solicitudRetiroVehiculo(ParqueaderoPOJO parqueaderoPOJO,LocalDateTime fechaSalida) throws CeladorException {
+		parqueaderoPOJO = parqueaderoRepositorio.findById(parqueaderoPOJO.getId());
+		if (parqueaderoPOJO == null) {
+			throw new CeladorException("Ticket no encontrado, verifique el número e intente nuevamente");
+		}
+		parqueaderoPOJO.setFechaSalida(fechaSalida);
+		calcularValorParqueo(parqueaderoPOJO);		
+		return parqueaderoPOJO;
+	}
+	
+	public ParqueaderoPOJO registrarRetiro(ParqueaderoPOJO parqueaderoPOJO) {
+		parqueaderoPOJO.setEstadoParqueaderoEnum(EstadoParqueaderoEnum.LIBERADO);
+		return parqueaderoRepositorio.save(parqueaderoPOJO);
+	}
 	
 
-	public BigDecimal calcularValorParqueo(ParqueaderoPOJO parqueaderoPOJO) {
-		return parqueaderoPOJO.getTicket().generarCobro(parqueaderoPOJO);
+	public void calcularValorParqueo(ParqueaderoPOJO parqueaderoPOJO) {
+		parqueaderoPOJO.setValorPagar(parqueaderoPOJO.getTicket().generarCobro(parqueaderoPOJO));
 	}
 	
 
