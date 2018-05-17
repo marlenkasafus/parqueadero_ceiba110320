@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,8 +21,8 @@ public class ParqueaderoEntidad {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "idVehiculo") 
+	@ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "idVehiculo",referencedColumnName="id") 
 	private VehiculoEntidad vehiculo;
 	
 	@Column(name="estado")

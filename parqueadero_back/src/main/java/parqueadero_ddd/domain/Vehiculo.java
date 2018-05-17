@@ -1,13 +1,8 @@
 package parqueadero_ddd.domain;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 
 public class Vehiculo {
-	
-	private static final ObjectMapper objectMapper = new ObjectMapper();
 
 	private String placa;
 	
@@ -42,17 +37,4 @@ public class Vehiculo {
 	public int getCilindraje() {
 		return cilindraje;
 	}
-
-	public void setCilindraje(int cilindraje) {
-		this.cilindraje = cilindraje;
-	}
-
-	public String toJson() throws JsonProcessingException {
-		return objectMapper.writeValueAsString(this);
-	}
-	
-	
-	
-	
-
 }

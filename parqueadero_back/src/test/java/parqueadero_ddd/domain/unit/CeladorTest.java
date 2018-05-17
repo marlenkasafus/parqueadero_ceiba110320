@@ -88,6 +88,25 @@ public class CeladorTest {
 	}
 	
 	@Test
+	public void realizarIngresoCarroDiaMiercolesSinDisponibilidad() {
+		List<RestriccionPlaca> restriccionPlacas = new ArrayList<>();
+		List<Integer> diasSemana = new ArrayList<>();
+		diasSemana.add(1);
+		restriccionPlacas.add(new RestriccionPlaca('A', diasSemana));
+		Mockito.when(restriccionPlacaRepositorio.findAll()).thenReturn(restriccionPlacas);
+		try {
+			Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.CARRO,0);
+			Mockito.when(parqueadero.getCantidadCupos(TipoVehiculoEnum.CARRO)).thenReturn(10);
+			Mockito.when(parqueadero.getCantidadCeldasEnUso(TipoVehiculoEnum.CARRO)).thenReturn(10);
+			calendario.setFechaActual(LocalDateTime.of(2018, 5, 16, 9, 32));
+			celador.solicitudIngresoVehiculo(vehiculo);
+			fail();
+		} catch (CeladorException | CalendarioException e) {
+			assertEquals("No hay celdas disponibles.", e.getMessage());
+		}
+	}
+	
+	@Test
 	public void solicitarRetiroVehiculoNoExistente() {
 		ParqueaderoPOJO parqueaderoPOJO = new ParqueaderoPOJO();
 		Mockito.when(parqueaderoRepositorio.findById(1)).thenReturn(null);

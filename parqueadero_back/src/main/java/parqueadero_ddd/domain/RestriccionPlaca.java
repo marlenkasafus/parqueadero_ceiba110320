@@ -1,13 +1,12 @@
 package parqueadero_ddd.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RestriccionPlaca {
 	
 	private char caracterPlaca;
 
-	private List<Integer> diasDeLaSemana = new ArrayList<>();
+	private List<Integer> diasDeLaSemana;
 
 	public RestriccionPlaca() {
 

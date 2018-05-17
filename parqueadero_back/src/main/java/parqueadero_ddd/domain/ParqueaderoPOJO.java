@@ -5,6 +5,10 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import parqueadero_ddd.domain.enums.EstadoParqueaderoEnum;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
@@ -14,8 +18,14 @@ public class ParqueaderoPOJO {
 
 	private Integer id;
 	private Vehiculo vehiculo;
+	
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)  
+	@JsonSerialize(using = LocalDateTimeSerializer.class)  
 	private LocalDateTime fechaIngreso;
 	private EstadoParqueaderoEnum estadoParqueaderoEnum;
+	
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)  
+	@JsonSerialize(using = LocalDateTimeSerializer.class)  
 	private LocalDateTime fechaSalida;
 	@JsonIgnore
 	private Ticket ticket;

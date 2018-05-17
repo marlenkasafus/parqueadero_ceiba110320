@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2 class="text-center">
+      Registrar ingreso
+    </h2>
+    <div *ngIf="esError" class="alert alert-dismissible fade show {{claseMensaje}}" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>{{mensaje}}</strong>
+    </div>
+    <div *ngIf="esTicket" class="alert alert-dismissible fade show {{claseMensaje}}" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4>
+        Registro exitoso
+      </h4>
+      <strong>Placa: {{parqueadero.vehiculo.placa}}</strong>
+      <br>
+      <strong>Tipo vehiculo: {{parqueadero.vehiculo.tipoVehiculoEnum}}</strong>
+      <br>
+      <strong>Fecha ingreso: {{parqueadero.fechaIngreso}}</strong>
+      <br>
+    </div>
+    <form name="ingreso" #ingreso id="ingreso">
+      <div class="form-group">
+        <label for="placa">Placa</label>
+        <input type="text" class="form-control" id="placa" name="placa" required minlength="5" maxlength="6" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
+          #placa [(ngModel)]="vehiculo.placa">
+      </div>
+      <div class="form-group">
+        <label for="tipoVehiculo">Tipo vehiculo</label>
+        <select class="form-control" id="tipoVehiculo" name="tipoVehiculo" required #vehiculo.tipoVehiculoEnum [(ngModel)]="vehiculo.tipoVehiculoEnum">
+          <option *ngFor="let tipoVehiculo of tipoVehiculos" [value]="tipoVehiculo">{{tipoVehiculo}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cilindraje">Cilindraje</label>
+        <input type="number" class="form-control" id="cilindraje" name="cilindraje" required minlength="2" maxlength="4" #vehiculo.cilindraje
+          [(ngModel)]="vehiculo.cilindraje">
+      </div>
+      <button type="button" class="btn btn-primary btn-block" (click)="ingresar()">Ingresar</button>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <h2 class="text-center">
+      Tickets activos
+    </h2>
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Placa</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Fecha Ingreso</th>
+          <th scope="col">Retirar Vehiculo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets">
+          <td>{{ticket.vehiculo.placa | uppercase}}</td>
+          <td>{{ticket.vehiculo.tipoVehiculoEnum}}</td>
+          <td>{{ticket.fechaIngreso | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="solicitudRetiro(content,ticket.id)">Realizar retiro</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss" id="modalRetirar">
+  <div class="modal-header">
+    <h4 class="modal-title text-center">Realizar Retiro</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" *ngIf="ticketSeleccionado">
+    <strong>Placa: </strong>
+    <p>{{ticketSeleccionado.vehiculo.placa | uppercase}}</p>
+    <br>
+    <strong>Fecha ingreso: </strong>
+    <p>{{ticketSeleccionado.fechaIngreso | date:'dd/MM/yyyy hh:mm:ss'}}</p>
+    <br>
+    <strong>Fecha salida: </strong>
+    <p>{{ticketSeleccionado.fechaSalida | date:'dd/MM/yyyy hh:mm:ss'}}</p>
+    <br>
+    <strong>Valor pagar: </strong>
+    <p>{{ticketSeleccionado.valorPagar}}</p>
+  </div>
+  <div class="modal-body" *ngIf="null == ticketSeleccionado">
+    <strong>Retiro exitoso</strong>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" *ngIf="ticketSeleccionado" (click)="confirmarRetiro(ticketSeleccionado)">Confirmar Retiro</button>
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Cerrar</button>
+  </div>
+</ng-template>
