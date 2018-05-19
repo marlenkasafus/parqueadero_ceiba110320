@@ -1,46 +1,109 @@
 package parqueadero_ddd.domain;
 
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.time.LocalDateTime;
 
-public abstract class Ticket {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
+import parqueadero_ddd.domain.enums.EstadoParqueaderoEnum;
+import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Ticket {
+
+	private Integer id;
+	private Vehiculo vehiculo;
 	
-	static final int MINUTES_PER_HOUR = 60;
-	static final int SECONDS_PER_MINUTE = 60;
-	static final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)  
+	@JsonSerialize(using = LocalDateTimeSerializer.class)  
+	private LocalDateTime fechaIngreso;
+	private EstadoParqueaderoEnum estadoParqueaderoEnum;
+	
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)  
+	@JsonSerialize(using = LocalDateTimeSerializer.class)  
+	private LocalDateTime fechaSalida;
+	@JsonIgnore
+	private TicketCobro ticketCobro;
+	private BigDecimal valorPagar;
+	
+	public Ticket() {
+	}
 
-	public long calcularTiempoParqueo(ParqueaderoPOJO parqueaderoPOJO) {
-		return getTime(parqueaderoPOJO.getFechaIngreso(), parqueaderoPOJO.getFechaSalida());
+	public Ticket(Vehiculo vehiculo, LocalDateTime fechaIngreso) {
+		this.vehiculo = vehiculo;
+		this.fechaIngreso = fechaIngreso;
+		this.estadoParqueaderoEnum = EstadoParqueaderoEnum.OCUPADO;
+		if (this.vehiculo != null) {
+			if (TipoVehiculoEnum.CARRO.equals(this.vehiculo.getTipoVehiculoEnum())) {
+				ticketCobro = new TicketCarro();
+			} else if (TipoVehiculoEnum.MOTO.equals(this.vehiculo.getTipoVehiculoEnum())) {
+				ticketCobro = new TicketMoto();
+			}			
+		}
 	}
 	
-	private long getTime(LocalDateTime dob, LocalDateTime now) {
-        Duration duration = Duration.between(dob, now);
-        long seconds = duration.getSeconds();
-        long hours = seconds / SECONDS_PER_HOUR;
-        long minutes = ((seconds % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE);
-        long secs = (seconds % SECONDS_PER_MINUTE);
-        if (0 < minutes || 0 < secs) {
-        	hours = hours+1;
+	public Ticket(Integer id, Vehiculo vehiculo, LocalDateTime fechaIngreso, LocalDateTime fechaSalida,BigDecimal valorPagar, EstadoParqueaderoEnum estadoParqueaderoEnum) {
+		this.id = id;
+		this.vehiculo = vehiculo;
+		this.fechaIngreso = fechaIngreso;
+		this.estadoParqueaderoEnum = estadoParqueaderoEnum;
+		this.fechaSalida = fechaSalida;
+		this.valorPagar = valorPagar;
+		if (this.vehiculo != null) {
+			if (TipoVehiculoEnum.CARRO.equals(this.vehiculo.getTipoVehiculoEnum())) {
+				ticketCobro = new TicketCarro();
+			} else if (TipoVehiculoEnum.MOTO.equals(this.vehiculo.getTipoVehiculoEnum())) {
+				ticketCobro = new TicketMoto();
+			}			
 		}
-        return hours;
-    }
-
-	public abstract BigDecimal generarCobro(ParqueaderoPOJO parqueaderoPOJO);
-
-	public long calcularCantidadDias(long cantidadHoras) {
-		return cantidadHoras / 24;
 	}
 
-	public long calcularHorasRestantes(long cantidadHoras, long cantidadDias) {
-		return cantidadHoras-(cantidadDias*24);
+	public Integer getId() {
+		return id;
 	}
 
-	public long calcularCantidadDiasPorRegla(long cantidadHorasRestantes) {
-		if (9<=cantidadHorasRestantes ) {
-			return 1;			
-		}
-		return 0;
+	public Vehiculo getVehiculo() {
+		return vehiculo;
+	}
+	
+	public LocalDateTime getFechaIngreso() {
+		return fechaIngreso;
 	}
 
+	public EstadoParqueaderoEnum getEstadoParqueaderoEnum() {
+		return estadoParqueaderoEnum;
+	}
+	
+	public void setEstadoParqueaderoEnum(EstadoParqueaderoEnum estadoParqueaderoEnum) {
+		this.estadoParqueaderoEnum = estadoParqueaderoEnum;
+	}
+
+	public void setFechaSalida(LocalDateTime fechaSalida) {
+		this.fechaSalida = fechaSalida;
+	}
+
+	public LocalDateTime getFechaSalida() {
+		return fechaSalida;
+	}
+
+	public TicketCobro getTicket() {
+		return ticketCobro;
+	}
+
+	public BigDecimal getValorPagar() {
+		return valorPagar;
+	}
+
+	public void setValorPagar(BigDecimal valorPagar) {
+		this.valorPagar = valorPagar;
+	}
+	
+	
+
+	
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import parqueadero_ddd.domain.configuration.ParqueaderoConfiguracion;
 import parqueadero_ddd.domain.enums.EstadoParqueaderoEnum;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.exception.CalendarioException;
@@ -16,11 +17,11 @@ import parqueadero_ddd.persistencia.repositorio.ParqueaderoRepositorio;
 public class Celador {
 	
 	private Calendario calendario;
-	private Parqueadero parqueadero;
+	private ParqueaderoConfiguracion parqueadero;
 	private ParqueaderoRepositorio parqueaderoRepositorio;
 	
 	@Autowired
-	public Celador(Calendario calendario, Parqueadero parqueadero, ParqueaderoRepositorio parqueaderoRepositorio) {
+	public Celador(Calendario calendario, ParqueaderoConfiguracion parqueadero, ParqueaderoRepositorio parqueaderoRepositorio) {
 		this.calendario = calendario;
 		this.parqueadero = parqueadero;
 		this.parqueaderoRepositorio = parqueaderoRepositorio;
@@ -32,38 +33,38 @@ public class Celador {
 		}
 	}
 
-	public ParqueaderoPOJO solicitudIngresoVehiculo(Vehiculo vehiculo) throws CeladorException, CalendarioException {
+	public Ticket solicitudIngresoVehiculo(Vehiculo vehiculo) throws CeladorException, CalendarioException {
 		hayEspaciosDisponibles(vehiculo.getTipoVehiculoEnum());
 		calendario.esDiaHabilParaVehiculo(vehiculo);
 		return generarIngresoVehiculo(vehiculo);
 	}
 
-	private ParqueaderoPOJO  generarIngresoVehiculo(Vehiculo vehiculo) {
-		ParqueaderoPOJO parqueaderoPOJO = new ParqueaderoPOJO(vehiculo, calendario.getFechaActual());
-		return parqueaderoRepositorio.save(parqueaderoPOJO);
+	private Ticket generarIngresoVehiculo(Vehiculo vehiculo) {
+		Ticket ticket = new Ticket(vehiculo, calendario.getFechaActual());
+		return parqueaderoRepositorio.save(ticket);
 	}
 
-	public ParqueaderoPOJO solicitudRetiroVehiculo(ParqueaderoPOJO parqueaderoPOJO,LocalDateTime fechaSalida) throws CeladorException {
-		parqueaderoPOJO = parqueaderoRepositorio.findById(parqueaderoPOJO.getId());
-		if (parqueaderoPOJO == null) {
+	public Ticket solicitudRetiroVehiculo(Ticket ticket,LocalDateTime fechaSalida) throws CeladorException {
+		ticket = parqueaderoRepositorio.findById(ticket.getId());
+		if (ticket == null) {
 			throw new CeladorException("Ticket no encontrado, verifique el número e intente nuevamente");
 		}
-		parqueaderoPOJO.setFechaSalida(fechaSalida);
-		calcularValorParqueo(parqueaderoPOJO);		
-		return parqueaderoPOJO;
+		ticket.setFechaSalida(fechaSalida);
+		calcularValorParqueo(ticket);		
+		return ticket;
 	}
 	
-	public ParqueaderoPOJO registrarRetiro(ParqueaderoPOJO parqueaderoPOJO) {
-		parqueaderoPOJO.setEstadoParqueaderoEnum(EstadoParqueaderoEnum.LIBERADO);
-		return parqueaderoRepositorio.save(parqueaderoPOJO);
+	public Ticket registrarRetiro(Ticket ticket) {
+		ticket.setEstadoParqueaderoEnum(EstadoParqueaderoEnum.LIBERADO);
+		return parqueaderoRepositorio.save(ticket);
 	}
 	
 
-	public void calcularValorParqueo(ParqueaderoPOJO parqueaderoPOJO) {
-		parqueaderoPOJO.setValorPagar(parqueaderoPOJO.getTicket().generarCobro(parqueaderoPOJO));
+	public void calcularValorParqueo(Ticket ticket) {
+		ticket.setValorPagar(ticket.getTicket().generarCobro(ticket));
 	}
 	
-	public List<ParqueaderoPOJO> consultarParqueaderosEnUso(){
+	public List<Ticket> consultarParqueaderosEnUso(){
 		return parqueaderoRepositorio.getParqueaderosEnUso();
 	}
 	

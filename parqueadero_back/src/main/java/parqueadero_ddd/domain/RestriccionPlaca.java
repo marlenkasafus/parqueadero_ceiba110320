@@ -8,10 +8,6 @@ public class RestriccionPlaca {
 
 	private List<Integer> diasDeLaSemana;
 
-	public RestriccionPlaca() {
-
-	}
-
 	public RestriccionPlaca(char caracterPlaca,List<Integer> diasDeLaSemana) {
 		this.caracterPlaca = caracterPlaca;
 		this.diasDeLaSemana = diasDeLaSemana;

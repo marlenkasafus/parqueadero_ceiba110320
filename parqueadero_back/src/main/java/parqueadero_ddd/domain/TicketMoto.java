@@ -2,32 +2,19 @@ package parqueadero_ddd.domain;
 
 import java.math.BigDecimal;
 
-public class TicketMoto extends Ticket {
+public class TicketMoto extends TicketCobro {
+
+	private static final BigDecimal VALOR_ADICIONAL = new BigDecimal(2000);
+	private static final BigDecimal VALOR_DIA = new BigDecimal(600);
+	private static final BigDecimal VALOR_HORA = new BigDecimal(500);
 
 	@Override
-	public BigDecimal generarCobro(ParqueaderoPOJO parqueaderoPOJO) {
-		long cantidadHoras = super.calcularTiempoParqueo(parqueaderoPOJO);
-		long cantidadDias = super.calcularCantidadDias(cantidadHoras);
-		long cantidadHorasRestantes = super.calcularHorasRestantes(cantidadHoras,cantidadDias);
-		long cantidadDiasPorRegla = super.calcularCantidadDiasPorRegla(cantidadHorasRestantes);
-		BigDecimal valorDia = getValorDia().multiply(new BigDecimal(cantidadDias));
-		if (0 < cantidadDiasPorRegla) {
-			valorDia = valorDia.add(getValorDia().multiply(new BigDecimal(cantidadDiasPorRegla)));
-		} else {
-			valorDia = valorDia.add(getValorHora(cantidadHorasRestantes));
+	public BigDecimal generarCobro(Ticket ticket) {
+		BigDecimal valorParqueo = super.getValorParqueo(ticket, VALOR_DIA, VALOR_HORA);
+		if (500 < ticket.getVehiculo().getCilindraje()) {
+			valorParqueo = valorParqueo.add(VALOR_ADICIONAL);
 		}
-		if (500 < parqueaderoPOJO.getVehiculo().getCilindraje()) {
-			valorDia = valorDia.add(new BigDecimal("2000"));
-		}
-		return valorDia;
-	}
-
-	private BigDecimal getValorHora(long cantidadHoras) {
-		return new BigDecimal(cantidadHoras*500);
-	}
-
-	private BigDecimal getValorDia() {
-		return new BigDecimal(600);
+		return valorParqueo;
 	}
 
 }

@@ -21,10 +21,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import parqueadero_ddd.domain.Calendario;
 import parqueadero_ddd.domain.Celador;
-import parqueadero_ddd.domain.Parqueadero;
-import parqueadero_ddd.domain.ParqueaderoPOJO;
+import parqueadero_ddd.domain.Ticket;
 import parqueadero_ddd.domain.RestriccionPlaca;
 import parqueadero_ddd.domain.Vehiculo;
+import parqueadero_ddd.domain.configuration.ParqueaderoConfiguracion;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.exception.CalendarioException;
 import parqueadero_ddd.exception.CeladorException;
@@ -43,7 +43,7 @@ public class CeladorTest {
 	private Calendario calendario;
 	
 	@Mock
-	private Parqueadero parqueadero;
+	private ParqueaderoConfiguracion parqueadero;
 	
 	@Mock
 	private ParqueaderoRepositorio parqueaderoRepositorio;
@@ -108,10 +108,10 @@ public class CeladorTest {
 	
 	@Test
 	public void solicitarRetiroVehiculoNoExistente() {
-		ParqueaderoPOJO parqueaderoPOJO = new ParqueaderoPOJO();
+		Ticket ticket = new Ticket();
 		Mockito.when(parqueaderoRepositorio.findById(1)).thenReturn(null);
 		try {
-		celador.solicitudRetiroVehiculo(parqueaderoPOJO,null);
+		celador.solicitudRetiroVehiculo(ticket,null);
 		fail();
 		} catch (CeladorException e) {
 			assertEquals("Ticket no encontrado, verifique el número e intente nuevamente", e.getMessage());
@@ -121,9 +121,9 @@ public class CeladorTest {
 	@Test
 	public void solicitarRetiroVehiculo() throws CeladorException {
 		Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.CARRO,0);
-		ParqueaderoPOJO parqueaderoPOJO = new ParqueaderoPOJO(1, vehiculo, LocalDateTime.of(2018, 5, 16, 7, 15),null,null,null);
-		Mockito.when(parqueaderoRepositorio.findById(1)).thenReturn(parqueaderoPOJO);
-		ParqueaderoPOJO parqueaderoPOJOretiro = celador.solicitudRetiroVehiculo(parqueaderoPOJO,LocalDateTime.of(2018, 5, 16, 9, 15));
-		assertEquals(new BigDecimal("2000"), parqueaderoPOJOretiro.getValorPagar());
+		Ticket ticket = new Ticket(1, vehiculo, LocalDateTime.of(2018, 5, 16, 7, 15),null,null,null);
+		Mockito.when(parqueaderoRepositorio.findById(1)).thenReturn(ticket);
+		Ticket ticketretiro = celador.solicitudRetiroVehiculo(ticket,LocalDateTime.of(2018, 5, 16, 9, 15));
+		assertEquals(new BigDecimal("2000"), ticketretiro.getValorPagar());
 	}
 }

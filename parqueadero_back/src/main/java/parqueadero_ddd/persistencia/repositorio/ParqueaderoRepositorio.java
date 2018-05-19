@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import parqueadero_ddd.domain.ParqueaderoPOJO;
+import parqueadero_ddd.domain.Ticket;
 import parqueadero_ddd.domain.enums.EstadoParqueaderoEnum;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.persistencia.builder.ParqueaderoBuilder;
@@ -23,16 +23,16 @@ public class ParqueaderoRepositorio {
 		return parqueaderoRepositorioJPA.countByEstadoAndTipoVehiculo(EstadoParqueaderoEnum.OCUPADO.getCodigo(),vehiculo.getCodigo());
 	}
 
-	public ParqueaderoPOJO save(ParqueaderoPOJO parqueaderoPOJO) {
-		return ParqueaderoBuilder.convertirAParqueaderoPOJO(parqueaderoRepositorioJPA.save(ParqueaderoBuilder.convertirAParqueaderoEntidad(parqueaderoPOJO)));
+	public Ticket save(Ticket ticket) {
+		return ParqueaderoBuilder.convertirAticket(parqueaderoRepositorioJPA.save(ParqueaderoBuilder.convertirAParqueaderoEntidad(ticket)));
 	}
 	
-	public ParqueaderoPOJO findById(Integer id) {
+	public Ticket findById(Integer id) {
 		Optional<ParqueaderoEntidad> optionalParqueaderoEntidad = parqueaderoRepositorioJPA.findById(id);
-		return optionalParqueaderoEntidad.isPresent()?ParqueaderoBuilder.convertirAParqueaderoPOJO(optionalParqueaderoEntidad.get()):null;
+		return optionalParqueaderoEntidad.isPresent()?ParqueaderoBuilder.convertirAticket(optionalParqueaderoEntidad.get()):null;
 	}
 
-	public List<ParqueaderoPOJO> getParqueaderosEnUso() {
+	public List<Ticket> getParqueaderosEnUso() {
 		return ParqueaderoBuilder.convertirAParqueaderosPOJO(parqueaderoRepositorioJPA.findAllEstadoOcupado(EstadoParqueaderoEnum.OCUPADO.getCodigo()));
 	}
 }

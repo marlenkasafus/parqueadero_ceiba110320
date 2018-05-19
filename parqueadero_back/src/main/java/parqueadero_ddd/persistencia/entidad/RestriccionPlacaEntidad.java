@@ -25,15 +25,7 @@ public class RestriccionPlacaEntidad {
 	@ElementCollection
     private List<Integer> diasDeLaSemana = new ArrayList<>();
 	
-	public RestriccionPlacaEntidad() {
-		
-	}
 	
-	public RestriccionPlacaEntidad(char placa, List<Integer> diasDeLaSemana) {
-		this.caracterPlaca = placa;
-		this.diasDeLaSemana = diasDeLaSemana;
-	}
-
 	public char getCaracterPlaca() {
 		return caracterPlaca;
 	}

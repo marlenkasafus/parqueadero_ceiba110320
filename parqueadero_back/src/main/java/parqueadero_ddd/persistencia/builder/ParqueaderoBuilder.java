@@ -3,7 +3,7 @@ package parqueadero_ddd.persistencia.builder;
 import java.util.ArrayList;
 import java.util.List;
 
-import parqueadero_ddd.domain.ParqueaderoPOJO;
+import parqueadero_ddd.domain.Ticket;
 import parqueadero_ddd.domain.Vehiculo;
 import parqueadero_ddd.domain.enums.EstadoParqueaderoEnum;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
@@ -15,26 +15,26 @@ public class ParqueaderoBuilder {
 
 	}
 
-	public static ParqueaderoEntidad convertirAParqueaderoEntidad(ParqueaderoPOJO parqueaderoPOJO) {
-		return new ParqueaderoEntidad(parqueaderoPOJO.getId(),
-				VehiculoBuilder.convertirAVehiculoEntidad(parqueaderoPOJO.getVehiculo()),
-				parqueaderoPOJO.getEstadoParqueaderoEnum().getCodigo(), parqueaderoPOJO.getFechaIngreso(),
-				parqueaderoPOJO.getFechaSalida(), parqueaderoPOJO.getValorPagar());
+	public static ParqueaderoEntidad convertirAParqueaderoEntidad(Ticket ticket) {
+		return new ParqueaderoEntidad(ticket.getId(),
+				VehiculoBuilder.convertirAVehiculoEntidad(ticket.getVehiculo()),
+				ticket.getEstadoParqueaderoEnum().getCodigo(), ticket.getFechaIngreso(),
+				ticket.getFechaSalida(), ticket.getValorPagar());
 	}
 
-	public static ParqueaderoPOJO convertirAParqueaderoPOJO(ParqueaderoEntidad parqueaderoEntidad) {
+	public static Ticket convertirAticket(ParqueaderoEntidad parqueaderoEntidad) {
 		Vehiculo vehiculo = new Vehiculo(parqueaderoEntidad.getVehiculo().getPlaca(),
 				TipoVehiculoEnum.getByCodigo(parqueaderoEntidad.getVehiculo().getTipo()),
 				parqueaderoEntidad.getVehiculo().getCilindraje());
-		return new ParqueaderoPOJO(parqueaderoEntidad.getId(), vehiculo, parqueaderoEntidad.getFechaIngreso(),
+		return new Ticket(parqueaderoEntidad.getId(), vehiculo, parqueaderoEntidad.getFechaIngreso(),
 				parqueaderoEntidad.getFechaSalida(), parqueaderoEntidad.getValorPagar(),
 				EstadoParqueaderoEnum.getByCodigo(parqueaderoEntidad.getEstado()));
 	}
 
-	public static List<ParqueaderoPOJO> convertirAParqueaderosPOJO(List<ParqueaderoEntidad> findAllEstadoOcupado) {
-		List<ParqueaderoPOJO> pojos = new ArrayList<>();
+	public static List<Ticket> convertirAParqueaderosPOJO(List<ParqueaderoEntidad> findAllEstadoOcupado) {
+		List<Ticket> pojos = new ArrayList<>();
 		for (ParqueaderoEntidad parqueaderoEntidad : findAllEstadoOcupado) {
-			pojos.add(convertirAParqueaderoPOJO(parqueaderoEntidad));
+			pojos.add(convertirAticket(parqueaderoEntidad));
 		}
 		return pojos;
 	}

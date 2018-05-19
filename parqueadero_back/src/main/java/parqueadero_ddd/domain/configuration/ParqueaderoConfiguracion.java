@@ -1,4 +1,4 @@
-package parqueadero_ddd.domain;
+package parqueadero_ddd.domain.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,12 +8,12 @@ import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.persistencia.repositorio.ParqueaderoRepositorio;
 
 @Service
-public class Parqueadero {
+public class ParqueaderoConfiguracion {
 	
 	private ParqueaderoRepositorio parqueaderoRepositorio;
 	
 	@Autowired
-	public Parqueadero(ParqueaderoRepositorio parqueaderoRepositorio) {
+	public ParqueaderoConfiguracion(ParqueaderoRepositorio parqueaderoRepositorio) {
 		this.parqueaderoRepositorio = parqueaderoRepositorio;
 	}
 	
