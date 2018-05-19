@@ -2,6 +2,11 @@ package parqueadero_ddd.domain;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+
+@JsonIgnoreType
+@JsonIgnoreProperties
 public class TicketMoto extends TicketCobro {
 
 	private static final BigDecimal VALOR_ADICIONAL = new BigDecimal(2000);
