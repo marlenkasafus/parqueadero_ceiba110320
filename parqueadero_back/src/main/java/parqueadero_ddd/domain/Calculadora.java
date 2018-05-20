@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public abstract class TicketCobro {
+public abstract class Calculadora {
 	
 	static final int MINUTES_PER_HOUR = 60;
 	static final int SECONDS_PER_MINUTE = 60;

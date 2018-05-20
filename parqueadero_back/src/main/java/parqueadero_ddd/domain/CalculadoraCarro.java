@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 @JsonIgnoreType
 @JsonIgnoreProperties
-public class TicketCarro extends TicketCobro{
+public class CalculadoraCarro extends Calculadora{
 
 	private static final BigDecimal VALOR_DIA = new BigDecimal("8000");
 	private static final BigDecimal VALOR_HORA = new BigDecimal("1000");
