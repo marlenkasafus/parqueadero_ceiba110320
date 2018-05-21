@@ -42,14 +42,14 @@ public class CalendarioTest {
 	}
 
 	@Test
-	public void noEsDiaHabilCarroPlacaADiaLunes() {
+	public void noEsDiaHabilCarroPlacaADiaMiercoles() {
 		List<RestriccionPlaca> restriccionPlacas = new ArrayList<>();
 		List<Integer> diasSemana = new ArrayList<>();
 		diasSemana.add(1);
 		restriccionPlacas.add(new RestriccionPlaca('A', diasSemana));
 		Mockito.when(restriccionPlacaRepositorio.findAll()).thenReturn(restriccionPlacas);
 		try {
-			calendario.setFechaActual(LocalDateTime.of(2018, 05, 7, 9, 32));
+			calendario.setFechaActual(LocalDateTime.of(2018, 05, 23, 9, 32));
 			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO,0));
 			fail();
 		} catch (CalendarioException e) {
@@ -58,14 +58,14 @@ public class CalendarioTest {
 	}
 	
 	@Test
-	public void noEsDiaHabilCarroPlacaADiaDomingo() {
+	public void noEsDiaHabilCarroPlacaADiaMartes() {
 		List<RestriccionPlaca> restriccionPlacas = new ArrayList<>();
 		List<Integer> diasSemana = new ArrayList<>();
 		diasSemana.add(7);
 		restriccionPlacas.add(new RestriccionPlaca('A', diasSemana));
 		Mockito.when(restriccionPlacaRepositorio.findAll()).thenReturn(restriccionPlacas);
 		try {
-			calendario.setFechaActual(LocalDateTime.of(2018, 05, 6, 9, 32));
+			calendario.setFechaActual(LocalDateTime.of(2018, 05, 22, 9, 32));
 			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO,0));
 			fail();
 		} catch (CalendarioException e) {

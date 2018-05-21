@@ -36,7 +36,7 @@ public class Calendario {
 			char caracterPlacaVehiculo = vehiculo.obtenerCaracterInicialPlaca();
 			int diaSemana = obtenerDiaActual();
 			for (RestriccionPlaca restriccionPlaca : restriccionPlacas) {
-				if (restriccionPlaca.getCaracterPlaca()==caracterPlacaVehiculo && restriccionPlaca.getDiasDeLaSemana().contains(diaSemana)) {
+				if (restriccionPlaca.getCaracterPlaca()==caracterPlacaVehiculo && !restriccionPlaca.getDiasDeLaSemana().contains(diaSemana)) {
 					throw new CalendarioException("No puede ingresar porque no está en un dia hábil");
 				}
 			}			

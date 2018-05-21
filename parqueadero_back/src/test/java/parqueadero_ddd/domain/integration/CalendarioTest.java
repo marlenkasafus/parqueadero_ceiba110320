@@ -55,9 +55,9 @@ public class CalendarioTest {
 //	}
 
 	@Test
-	public void noEsDiaHabilCarroPlacaADiaLunes() {
+	public void noEsDiaHabilCarroPlacaADiaMartes() {
 		try {
-			calendario.setFechaActual(LocalDateTime.of(2018, 05, 7, 9, 32));
+			calendario.setFechaActual(LocalDateTime.of(2018, 05, 8, 9, 32));
 			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO,0));
 			fail();
 		} catch (CalendarioException e) {
@@ -66,9 +66,9 @@ public class CalendarioTest {
 	}
 	
 	@Test
-	public void noEsDiaHabilCarroPlacaADiaDomingo() {
+	public void noEsDiaHabilCarroPlacaADiaSabado() {
 		try {
-			calendario.setFechaActual(LocalDateTime.of(2018, 05, 6, 9, 32));
+			calendario.setFechaActual(LocalDateTime.of(2018, 05, 5, 9, 32));
 			calendario.esDiaHabilParaVehiculo(new Vehiculo("AZD123",TipoVehiculoEnum.CARRO,0));
 			fail();
 		} catch (CalendarioException e) {
@@ -80,7 +80,7 @@ public class CalendarioTest {
 	public void realizarIngresoCarroDiaNoHabil() throws CeladorException  {
 		try {
 			Vehiculo vehiculo = new Vehiculo("AZD123", TipoVehiculoEnum.CARRO,0);
-			calendario.setFechaActual(LocalDateTime.of(2018, 05, 6, 9, 32));
+			calendario.setFechaActual(LocalDateTime.of(2018, 05, 5, 9, 32));
 			celador.solicitudIngresoVehiculo(vehiculo);
 			fail();
 		} catch (CalendarioException e) {
