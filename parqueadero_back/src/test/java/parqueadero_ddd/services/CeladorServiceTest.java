@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import parqueadero_ddd.domain.Ticket;
 import parqueadero_ddd.domain.Vehiculo;
+import parqueadero_ddd.domain.enums.EstadoParqueaderoEnum;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 
 @RunWith(SpringRunner.class)
@@ -46,11 +47,14 @@ public class CeladorServiceTest {
 	@Test
 	public void realizarSolicitudSalida() throws InterruptedException {
 		ResponseEntity<Object[]> responseTest = restTemplate.getForEntity("http://localhost:"+localServerPort+"/celador/vehiculos/actuales",Object[].class);
-		System.out.println(responseTest.getBody()[0].toString()); 
 		HashMap<String, Object> hashMap = (HashMap<String, Object>) responseTest.getBody()[0];
 		ResponseEntity<Ticket> responseEntityTicket = restTemplate.getForEntity("http://localhost:"+localServerPort+"/celador/retiro/solicitud?id="+hashMap.get("id"), Ticket.class);
+		Ticket ticket = responseEntityTicket.getBody();
 		assertEquals(HttpStatus.OK, responseEntityTicket.getStatusCode());
-		assertEquals(new BigDecimal(500), responseEntityTicket.getBody().getValorPagar());
+		assertEquals(new BigDecimal(500), ticket.getValorPagar());
+		ResponseEntity<Ticket> responseEntityTicketRetiro = restTemplate.postForEntity("http://localhost:"+localServerPort+"/celador/retiro/solicitud", ticket,Ticket.class);
+		assertEquals(HttpStatus.OK, responseEntityTicketRetiro.getStatusCode());
+		assertEquals(EstadoParqueaderoEnum.LIBERADO,responseEntityTicketRetiro.getBody().getEstadoParqueaderoEnum());
 	}
 
 }

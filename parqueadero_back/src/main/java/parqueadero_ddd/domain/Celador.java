@@ -55,8 +55,6 @@ public class Celador {
 			throw new CeladorException("Ticket no encontrado, verifique el número e intente nuevamente");
 		}
 		ticket.setFechaSalida(fechaSalida);
-		System.out.println(ticket.getFechaIngreso());
-		System.out.println(ticket.getFechaSalida());
 		try {
 			calcularValorParqueo(ticket);					
 		} catch (ParqueaderoException e) {

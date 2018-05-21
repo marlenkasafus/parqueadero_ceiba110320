@@ -33,7 +33,7 @@ export class ParqueaderoService {
   }
 
   confirmarRetiro(ticket: Ticket){
-    return this.http.put(`${this.url}retiro/solicitud`,ticket,httpOptions).toPromise();
+    return this.http.post(`${this.url}retiro/solicitud`,ticket,httpOptions).toPromise();
   }
 
   getTicketsVigentes(){

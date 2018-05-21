@@ -52,10 +52,9 @@ public class CeladorService {
 		return new ResponseEntity<>(ticket, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/retiro/solicitud",method=RequestMethod.PUT)
+	@RequestMapping(value="/retiro/solicitud",method=RequestMethod.POST)
 	public ResponseEntity<Ticket> registrarRetiroVehiculo(@RequestBody Ticket ticketRequest){
-		Ticket ticket;
-			ticket = celador.registrarRetiro(ticketRequest);
+		Ticket ticket = celador.registrarRetiro(ticketRequest);
 		return new ResponseEntity<>(ticket, HttpStatus.OK);
 	}
 	
