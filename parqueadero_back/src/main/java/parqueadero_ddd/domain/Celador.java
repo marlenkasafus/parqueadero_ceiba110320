@@ -11,6 +11,7 @@ import parqueadero_ddd.domain.enums.EstadoParqueaderoEnum;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.exception.CalendarioException;
 import parqueadero_ddd.exception.CeladorException;
+import parqueadero_ddd.exception.ParqueaderoException;
 import parqueadero_ddd.persistencia.repositorio.TicketRepositorio;
 
 @Service
@@ -44,7 +45,7 @@ public class Celador {
 		return ticketRepositorio.save(ticket);
 	}
 
-	public Ticket solicitudRetiroVehiculo(Ticket ticket,LocalDateTime fechaSalida) throws CeladorException {
+	public Ticket solicitudRetiroVehiculo(Ticket ticket,LocalDateTime fechaSalida) throws CeladorException, ParqueaderoException {
 		ticket = ticketRepositorio.findById(ticket.getId());
 		if (ticket == null) {
 			throw new CeladorException("Ticket no encontrado, verifique el número e intente nuevamente");
@@ -60,8 +61,8 @@ public class Celador {
 	}
 	
 
-	public void calcularValorParqueo(Ticket ticket) {
-		ticket.setValorPagar(ticket.getCalculadora().generarCobro(ticket));
+	public void calcularValorParqueo(Ticket ticket) throws ParqueaderoException {
+		ticket.setValorPagar(Calculadora.getInstance(ticket).generarCobro(ticket));
 	}
 	
 	public List<Ticket> consultarParqueaderosEnUso(){

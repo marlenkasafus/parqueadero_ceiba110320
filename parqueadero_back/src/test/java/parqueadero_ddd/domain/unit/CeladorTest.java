@@ -28,6 +28,7 @@ import parqueadero_ddd.domain.configuration.ParqueaderoConfiguracion;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.exception.CalendarioException;
 import parqueadero_ddd.exception.CeladorException;
+import parqueadero_ddd.exception.ParqueaderoException;
 import parqueadero_ddd.persistencia.repositorio.TicketRepositorio;
 import parqueadero_ddd.persistencia.repositorio.RestriccionPlacaRepositorio;
 
@@ -107,7 +108,7 @@ public class CeladorTest {
 	}
 	
 	@Test
-	public void solicitarRetiroVehiculoNoExistente() {
+	public void solicitarRetiroVehiculoNoExistente() throws ParqueaderoException {
 		Ticket ticket = new Ticket();
 		Mockito.when(parqueaderoRepositorio.findById(1)).thenReturn(null);
 		try {
@@ -119,7 +120,7 @@ public class CeladorTest {
 	}
 	
 	@Test
-	public void solicitarRetiroVehiculo() throws CeladorException {
+	public void solicitarRetiroVehiculo() throws CeladorException, ParqueaderoException {
 		Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.CARRO,0);
 		Ticket ticket = new Ticket(1, vehiculo, LocalDateTime.of(2018, 5, 16, 7, 15),null,null,null);
 		Mockito.when(parqueaderoRepositorio.findById(1)).thenReturn(ticket);

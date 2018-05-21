@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
+import parqueadero_ddd.exception.ParqueaderoException;
+
 public abstract class Calculadora {
 	
 	static final int MINUTES_PER_HOUR = 60;
@@ -59,5 +62,15 @@ public abstract class Calculadora {
 
 	private BigDecimal getValorHora(long cantidadHoras, BigDecimal valorHora) {
 		return valorHora.multiply(new BigDecimal(cantidadHoras));
+	}
+
+	public static Calculadora getInstance(Ticket ticket) throws ParqueaderoException {
+		if (TipoVehiculoEnum.CARRO.equals(ticket.getVehiculo().getTipoVehiculoEnum())) {
+			return new CalculadoraCarro();
+		} else if (TipoVehiculoEnum.MOTO.equals(ticket.getVehiculo().getTipoVehiculoEnum())) {
+			return new CalculadoraMoto();
+		} else {
+			throw new ParqueaderoException("El tipo de vehiculo es obligatorio para calcular el valor");
+		}
 	}
 }

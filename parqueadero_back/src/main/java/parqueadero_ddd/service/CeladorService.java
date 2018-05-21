@@ -18,6 +18,7 @@ import parqueadero_ddd.domain.Ticket;
 import parqueadero_ddd.domain.Vehiculo;
 import parqueadero_ddd.exception.CalendarioException;
 import parqueadero_ddd.exception.CeladorException;
+import parqueadero_ddd.exception.ParqueaderoException;
 
 @RestController
 @RequestMapping("/celador")
@@ -47,7 +48,7 @@ public class CeladorService {
 		Ticket ticket;
 		try {
 			ticket = celador.solicitudRetiroVehiculo(ticketRequest, LocalDateTime.now());
-		} catch (CeladorException e) {
+		} catch (CeladorException | ParqueaderoException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
 		}
 		return new ResponseEntity<>(ticket, HttpStatus.OK);

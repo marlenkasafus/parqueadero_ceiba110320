@@ -27,8 +27,6 @@ public class Ticket {
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)  
 	@JsonSerialize(using = LocalDateTimeSerializer.class)  
 	private LocalDateTime fechaSalida;
-	@JsonIgnore
-	private Calculadora calculadora;
 	private BigDecimal valorPagar;
 	
 	public Ticket() {
@@ -38,13 +36,6 @@ public class Ticket {
 		this.vehiculo = vehiculo;
 		this.fechaIngreso = fechaIngreso;
 		this.estadoParqueaderoEnum = EstadoParqueaderoEnum.OCUPADO;
-		if (this.vehiculo != null) {
-			if (TipoVehiculoEnum.CARRO.equals(this.vehiculo.getTipoVehiculoEnum())) {
-				calculadora = new CalculadoraCarro();
-			} else if (TipoVehiculoEnum.MOTO.equals(this.vehiculo.getTipoVehiculoEnum())) {
-				calculadora = new CalculadoraMoto();
-			}			
-		}
 	}
 	
 	public Ticket(Integer id, Vehiculo vehiculo, LocalDateTime fechaIngreso, LocalDateTime fechaSalida,BigDecimal valorPagar, EstadoParqueaderoEnum estadoParqueaderoEnum) {
@@ -54,13 +45,6 @@ public class Ticket {
 		this.estadoParqueaderoEnum = estadoParqueaderoEnum;
 		this.fechaSalida = fechaSalida;
 		this.valorPagar = valorPagar;
-		if (this.vehiculo != null) {
-			if (TipoVehiculoEnum.CARRO.equals(this.vehiculo.getTipoVehiculoEnum())) {
-				calculadora = new CalculadoraCarro();
-			} else if (TipoVehiculoEnum.MOTO.equals(this.vehiculo.getTipoVehiculoEnum())) {
-				calculadora = new CalculadoraMoto();
-			}			
-		}
 	}
 
 	public Integer getId() {
@@ -90,11 +74,7 @@ public class Ticket {
 	public LocalDateTime getFechaSalida() {
 		return fechaSalida;
 	}
-
-	public Calculadora getCalculadora() {
-		return calculadora;
-	}
-
+	
 	public BigDecimal getValorPagar() {
 		return valorPagar;
 	}
