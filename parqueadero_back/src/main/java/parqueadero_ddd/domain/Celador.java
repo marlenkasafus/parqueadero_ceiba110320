@@ -61,7 +61,7 @@ public class Celador {
 	
 
 	public void calcularValorParqueo(Ticket ticket) {
-		ticket.setValorPagar(ticket.getTicket().generarCobro(ticket));
+		ticket.setValorPagar(ticket.getCalculadora().generarCobro(ticket));
 	}
 	
 	public List<Ticket> consultarParqueaderosEnUso(){
