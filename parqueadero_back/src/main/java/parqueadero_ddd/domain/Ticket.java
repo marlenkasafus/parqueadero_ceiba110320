@@ -44,6 +44,12 @@ public class Ticket {
 		this.fechaSalida = fechaSalida;
 		this.valorPagar = valorPagar;
 	}
+	
+	
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getId() {
 		return id;

@@ -18,8 +18,7 @@ public abstract class Calculadora {
 	}
 	
 	public long getTime(LocalDateTime dob, LocalDateTime now) {
-        Duration duration = Duration.between(dob, now);
-        long seconds = duration.getSeconds();
+        long seconds = obtenerSegundos(dob, now);
         long hours = seconds / SECONDS_PER_HOUR;
         long minutes = ((seconds % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE);
         long secs = (seconds % SECONDS_PER_MINUTE);
@@ -28,6 +27,18 @@ public abstract class Calculadora {
 		}
         return hours;
     }
+
+	private long obtenerSegundos(LocalDateTime dob, LocalDateTime now) {
+		Duration duration = Duration.between(dob, now);
+        long seconds = duration.getSeconds();
+        if (0 == seconds) {
+        	int miliSegundos = duration.getNano();
+        	if (miliSegundos>0) {
+        		seconds = 1;
+			}
+		}
+		return seconds;
+	}
 
 	public abstract BigDecimal generarCobro(Ticket ticket);
 

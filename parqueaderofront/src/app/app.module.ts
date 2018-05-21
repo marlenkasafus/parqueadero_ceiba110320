@@ -6,11 +6,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { ParqueaderoComponent } from './parqueadero/parqueadero.component';
+import { TasaRepresentativaComponent } from './tasa-representativa/tasa-representativa.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ParqueaderoComponent
+    ParqueaderoComponent,
+    TasaRepresentativaComponent
   ],
   imports: [
     BrowserModule,
