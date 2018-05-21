@@ -145,7 +145,7 @@ public class TicketTest {
 		Ticket ticket = new Ticket(null,vehiculo, LocalDateTime.of(2018, 5, 15, 11, 14),null,null,null);
 		ticket.setFechaSalida(LocalDateTime.of(2018, 5, 15, 21, 10));
 		BigDecimal cantidadHoras = ticket.getTicket().generarCobro(ticket);
-		assertEquals(new BigDecimal("600"), cantidadHoras);
+		assertEquals(new BigDecimal("4000"), cantidadHoras);
 	}
 
 	@Test
@@ -154,7 +154,7 @@ public class TicketTest {
 		Ticket ticket = new Ticket(null,vehiculo, LocalDateTime.of(2018, 5, 15, 11, 14),null,null,null);
 		ticket.setFechaSalida(LocalDateTime.of(2018, 5, 15, 21, 10));
 		BigDecimal cantidadHoras = ticket.getTicket().generarCobro(ticket);
-		assertEquals(new BigDecimal("2600"), cantidadHoras);
+		assertEquals(new BigDecimal("6000"), cantidadHoras);
 	}
 
 	@Test
@@ -163,7 +163,7 @@ public class TicketTest {
 		Ticket ticket = new Ticket(null,vehiculo, LocalDateTime.of(2018, 5, 15, 11, 14),null,null,null);
 		ticket.setFechaSalida(LocalDateTime.of(2018, 5, 16, 2, 10));
 		BigDecimal cantidadHoras = ticket.getTicket().generarCobro(ticket);
-		assertEquals(new BigDecimal("600"), cantidadHoras);
+		assertEquals(new BigDecimal("4000"), cantidadHoras);
 	}
 
 	@Test
@@ -172,7 +172,7 @@ public class TicketTest {
 		Ticket ticket = new Ticket(null,vehiculo, LocalDateTime.of(2018, 5, 15, 11, 14),null,null,null);
 		ticket.setFechaSalida(LocalDateTime.of(2018, 5, 16, 2, 10));
 		BigDecimal cantidadHoras = ticket.getTicket().generarCobro(ticket);
-		assertEquals(new BigDecimal("2600"), cantidadHoras);
+		assertEquals(new BigDecimal("6000"), cantidadHoras);
 	}
 
 	@Test
@@ -181,7 +181,7 @@ public class TicketTest {
 		Ticket ticket = new Ticket(null,vehiculo, LocalDateTime.of(2018, 5, 15, 11, 14),null,null,null);
 		ticket.setFechaSalida(LocalDateTime.of(2018, 5, 16, 12, 10));
 		BigDecimal cantidadHoras = ticket.getTicket().generarCobro(ticket);
-		assertEquals(new BigDecimal("1100"), cantidadHoras);
+		assertEquals(new BigDecimal("4500"), cantidadHoras);
 	}
 
 	@Test
@@ -190,7 +190,7 @@ public class TicketTest {
 		Ticket ticket = new Ticket(null,vehiculo, LocalDateTime.of(2018, 5, 15, 11, 14),null,null,null);
 		ticket.setFechaSalida(LocalDateTime.of(2018, 5, 16, 12, 10));
 		BigDecimal cantidadHoras = ticket.getTicket().generarCobro(ticket);
-		assertEquals(new BigDecimal("3100"), cantidadHoras);
+		assertEquals(new BigDecimal("6500"), cantidadHoras);
 	}
 
 	@Test
@@ -199,7 +199,7 @@ public class TicketTest {
 		Ticket ticket = new Ticket(null,vehiculo, LocalDateTime.of(2018, 5, 15, 11, 14),null,null,null);
 		ticket.setFechaSalida(LocalDateTime.of(2018, 5, 16, 17, 10));
 		BigDecimal cantidadHoras = ticket.getTicket().generarCobro(ticket);
-		assertEquals(new BigDecimal("3600"), cantidadHoras);
+		assertEquals(new BigDecimal("7000"), cantidadHoras);
 	}
 
 	@Test
@@ -208,7 +208,7 @@ public class TicketTest {
 		Ticket ticket = new Ticket(null,vehiculo, LocalDateTime.of(2018, 5, 15, 11, 14),null,null,null);
 		ticket.setFechaSalida(LocalDateTime.of(2018, 5, 16, 17, 10));
 		BigDecimal cantidadHoras = ticket.getTicket().generarCobro(ticket);
-		assertEquals(new BigDecimal("5600"), cantidadHoras);
+		assertEquals(new BigDecimal("9000"), cantidadHoras);
 	}
 
 	@Test
@@ -217,7 +217,7 @@ public class TicketTest {
 		Ticket ticket = new Ticket(null,vehiculo, LocalDateTime.of(2018, 5, 15, 11, 14),null,null,null);
 		ticket.setFechaSalida(LocalDateTime.of(2018, 5, 16, 22, 10));
 		BigDecimal cantidadHoras = ticket.getTicket().generarCobro(ticket);
-		assertEquals(new BigDecimal("1200"), cantidadHoras);
+		assertEquals(new BigDecimal("8000"), cantidadHoras);
 	}
 
 	@Test
@@ -226,7 +226,7 @@ public class TicketTest {
 		Ticket ticket = new Ticket(null,vehiculo, LocalDateTime.of(2018, 5, 15, 11, 14),null,null,null);
 		ticket.setFechaSalida(LocalDateTime.of(2018, 5, 16, 22, 10));
 		BigDecimal cantidadHoras = ticket.getTicket().generarCobro(ticket);
-		assertEquals(new BigDecimal("3200"), cantidadHoras);
+		assertEquals(new BigDecimal("10000"), cantidadHoras);
 	}
 
 }

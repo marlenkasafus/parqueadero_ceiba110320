@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreType;
 public class CalculadoraMoto extends Calculadora {
 
 	private static final BigDecimal VALOR_ADICIONAL = new BigDecimal(2000);
-	private static final BigDecimal VALOR_DIA = new BigDecimal(600);
+	private static final BigDecimal VALOR_DIA = new BigDecimal(4000);
 	private static final BigDecimal VALOR_HORA = new BigDecimal(500);
 
 	@Override
