@@ -8,3 +8,14 @@ allprojects {
 	project.ext.mockito = ['org.mockito:mockito-all:1.10.19']
 	project.ext.log4j = ['log4j:log4j:1.2.17']
 }
+
+project(':parqueadero_back') { 
+   dependencies {
+   
+   }
+}
+project(':SuperintendenciaWebServiceTRMClient') { 
+   dependencies {
+   
+   }
+}
