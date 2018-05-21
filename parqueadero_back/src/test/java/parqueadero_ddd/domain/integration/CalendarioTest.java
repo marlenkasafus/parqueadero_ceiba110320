@@ -83,7 +83,7 @@ public class CalendarioTest {
 			calendario.setFechaActual(LocalDateTime.of(2018, 05, 5, 9, 32));
 			celador.solicitudIngresoVehiculo(vehiculo);
 			fail();
-		} catch (CalendarioException e) {
+		} catch (CeladorException e) {
 			assertEquals("No puede ingresar porque no está en un dia hábil",  e.getMessage());
 		}	
 	}

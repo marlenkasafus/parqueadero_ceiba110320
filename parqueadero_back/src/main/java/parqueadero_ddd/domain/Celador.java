@@ -34,9 +34,13 @@ public class Celador {
 		}
 	}
 
-	public Ticket solicitudIngresoVehiculo(Vehiculo vehiculo) throws CeladorException, CalendarioException {
+	public Ticket solicitudIngresoVehiculo(Vehiculo vehiculo) throws CeladorException {
 		hayEspaciosDisponibles(vehiculo.getTipoVehiculoEnum());
-		calendario.esDiaHabilParaVehiculo(vehiculo);
+		try {
+			calendario.esDiaHabilParaVehiculo(vehiculo);			
+		} catch (CalendarioException e) {
+			throw new CeladorException(e.getMessage());
+		}
 		return generarIngresoVehiculo(vehiculo);
 	}
 
@@ -45,13 +49,17 @@ public class Celador {
 		return ticketRepositorio.save(ticket);
 	}
 
-	public Ticket solicitudRetiroVehiculo(Ticket ticket,LocalDateTime fechaSalida) throws CeladorException, ParqueaderoException {
+	public Ticket solicitudRetiroVehiculo(Ticket ticket,LocalDateTime fechaSalida) throws CeladorException {
 		ticket = ticketRepositorio.findById(ticket.getId());
 		if (ticket == null) {
 			throw new CeladorException("Ticket no encontrado, verifique el número e intente nuevamente");
 		}
 		ticket.setFechaSalida(fechaSalida);
-		calcularValorParqueo(ticket);		
+		try {
+			calcularValorParqueo(ticket);					
+		} catch (ParqueaderoException e) {
+			throw new CeladorException(e.getMessage());
+		}
 		return ticket;
 	}
 	

@@ -21,16 +21,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import parqueadero_ddd.domain.Calendario;
 import parqueadero_ddd.domain.Celador;
-import parqueadero_ddd.domain.Ticket;
 import parqueadero_ddd.domain.RestriccionPlaca;
+import parqueadero_ddd.domain.Ticket;
 import parqueadero_ddd.domain.Vehiculo;
 import parqueadero_ddd.domain.configuration.ParqueaderoConfiguracion;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
-import parqueadero_ddd.exception.CalendarioException;
 import parqueadero_ddd.exception.CeladorException;
 import parqueadero_ddd.exception.ParqueaderoException;
-import parqueadero_ddd.persistencia.repositorio.TicketRepositorio;
 import parqueadero_ddd.persistencia.repositorio.RestriccionPlacaRepositorio;
+import parqueadero_ddd.persistencia.repositorio.TicketRepositorio;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -83,7 +82,7 @@ public class CeladorTest {
 			calendario.setFechaActual(LocalDateTime.of(2018, 05, 7, 9, 32));
 			celador.solicitudIngresoVehiculo(vehiculo);
 			fail();
-		} catch (CeladorException | CalendarioException e) {
+		} catch (CeladorException e) {
 			assertEquals("No hay celdas disponibles.", e.getMessage());
 		}
 	}
@@ -102,7 +101,7 @@ public class CeladorTest {
 			calendario.setFechaActual(LocalDateTime.of(2018, 5, 16, 9, 32));
 			celador.solicitudIngresoVehiculo(vehiculo);
 			fail();
-		} catch (CeladorException | CalendarioException e) {
+		} catch (CeladorException e) {
 			assertEquals("No hay celdas disponibles.", e.getMessage());
 		}
 	}
