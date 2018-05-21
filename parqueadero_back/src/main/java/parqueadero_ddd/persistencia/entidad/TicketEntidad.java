@@ -14,8 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="parqueadero")
-public class ParqueaderoEntidad {
+@Table(name="ticket")
+public class TicketEntidad {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,10 +37,10 @@ public class ParqueaderoEntidad {
 	@Column(name="valorPagar")
 	private BigDecimal valorPagar;
 	
-	public ParqueaderoEntidad() {
+	public TicketEntidad() {
 	}
 	
-	public ParqueaderoEntidad(Integer id, VehiculoEntidad vehiculo, String estado, LocalDateTime fechaIngreso,LocalDateTime fechaSalida, BigDecimal valorPagar) {
+	public TicketEntidad(Integer id, VehiculoEntidad vehiculo, String estado, LocalDateTime fechaIngreso,LocalDateTime fechaSalida, BigDecimal valorPagar) {
 		this.id = id;
 		this.vehiculo = vehiculo;
 		this.estado = estado;

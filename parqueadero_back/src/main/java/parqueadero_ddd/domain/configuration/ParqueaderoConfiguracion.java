@@ -5,16 +5,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
-import parqueadero_ddd.persistencia.repositorio.ParqueaderoRepositorio;
+import parqueadero_ddd.persistencia.repositorio.TicketRepositorio;
 
 @Service
 public class ParqueaderoConfiguracion {
 	
-	private ParqueaderoRepositorio parqueaderoRepositorio;
+	private TicketRepositorio ticketRepositorio;
 	
 	@Autowired
-	public ParqueaderoConfiguracion(ParqueaderoRepositorio parqueaderoRepositorio) {
-		this.parqueaderoRepositorio = parqueaderoRepositorio;
+	public ParqueaderoConfiguracion(TicketRepositorio ticketRepositorio) {
+		this.ticketRepositorio = ticketRepositorio;
 	}
 	
 	@Value("${parqueadero.max.carros}")
@@ -34,7 +34,7 @@ public class ParqueaderoConfiguracion {
 	}
 
 	public int getCantidadCeldasEnUso(TipoVehiculoEnum tipoVehiculo) {
-		return parqueaderoRepositorio.getCantidadParqueaderosEnUsoPorVehiculo(tipoVehiculo);
+		return ticketRepositorio.getCantidadParqueaderosEnUsoPorVehiculo(tipoVehiculo);
 	}
 
 }

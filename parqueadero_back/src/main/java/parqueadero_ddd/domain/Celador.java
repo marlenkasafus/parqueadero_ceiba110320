@@ -11,20 +11,20 @@ import parqueadero_ddd.domain.enums.EstadoParqueaderoEnum;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.exception.CalendarioException;
 import parqueadero_ddd.exception.CeladorException;
-import parqueadero_ddd.persistencia.repositorio.ParqueaderoRepositorio;
+import parqueadero_ddd.persistencia.repositorio.TicketRepositorio;
 
 @Service
 public class Celador {
 	
 	private Calendario calendario;
 	private ParqueaderoConfiguracion parqueadero;
-	private ParqueaderoRepositorio parqueaderoRepositorio;
+	private TicketRepositorio ticketRepositorio;
 	
 	@Autowired
-	public Celador(Calendario calendario, ParqueaderoConfiguracion parqueadero, ParqueaderoRepositorio parqueaderoRepositorio) {
+	public Celador(Calendario calendario, ParqueaderoConfiguracion parqueadero, TicketRepositorio ticketRepositorio) {
 		this.calendario = calendario;
 		this.parqueadero = parqueadero;
-		this.parqueaderoRepositorio = parqueaderoRepositorio;
+		this.ticketRepositorio = ticketRepositorio;
 	}
 	
 	public void hayEspaciosDisponibles(TipoVehiculoEnum tipoVehiculo) throws CeladorException {
@@ -41,11 +41,11 @@ public class Celador {
 
 	private Ticket generarIngresoVehiculo(Vehiculo vehiculo) {
 		Ticket ticket = new Ticket(vehiculo, calendario.getFechaActual());
-		return parqueaderoRepositorio.save(ticket);
+		return ticketRepositorio.save(ticket);
 	}
 
 	public Ticket solicitudRetiroVehiculo(Ticket ticket,LocalDateTime fechaSalida) throws CeladorException {
-		ticket = parqueaderoRepositorio.findById(ticket.getId());
+		ticket = ticketRepositorio.findById(ticket.getId());
 		if (ticket == null) {
 			throw new CeladorException("Ticket no encontrado, verifique el número e intente nuevamente");
 		}
@@ -56,7 +56,7 @@ public class Celador {
 	
 	public Ticket registrarRetiro(Ticket ticket) {
 		ticket.setEstadoParqueaderoEnum(EstadoParqueaderoEnum.LIBERADO);
-		return parqueaderoRepositorio.save(ticket);
+		return ticketRepositorio.save(ticket);
 	}
 	
 
@@ -65,7 +65,7 @@ public class Celador {
 	}
 	
 	public List<Ticket> consultarParqueaderosEnUso(){
-		return parqueaderoRepositorio.getParqueaderosEnUso();
+		return ticketRepositorio.getParqueaderosEnUso();
 	}
 	
 

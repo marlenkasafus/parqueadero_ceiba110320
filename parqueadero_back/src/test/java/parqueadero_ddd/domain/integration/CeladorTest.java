@@ -17,8 +17,8 @@ import parqueadero_ddd.domain.Vehiculo;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.exception.CalendarioException;
 import parqueadero_ddd.exception.CeladorException;
-import parqueadero_ddd.persistencia.entidad.ParqueaderoEntidad;
-import parqueadero_ddd.persistencia.repositorio.jpa.ParqueaderoRepositorioJPA;
+import parqueadero_ddd.persistencia.entidad.TicketEntidad;
+import parqueadero_ddd.persistencia.repositorio.jpa.TicketRepositorioJPA;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,14 +30,14 @@ public class CeladorTest {
 	private Celador celador;
 	
 	@Autowired
-	private ParqueaderoRepositorioJPA parqueaderoRepositorioJPA;
+	private TicketRepositorioJPA parqueaderoRepositorioJPA;
 	
 	@Test
 	public void realizarIngresoExitoso() throws CeladorException, CalendarioException {
 		Vehiculo vehiculo = new Vehiculo("YDX10D", TipoVehiculoEnum.MOTO,0);
 		celador.solicitudIngresoVehiculo(vehiculo);
 		
-		List<ParqueaderoEntidad> parqueaderoEntidads = parqueaderoRepositorioJPA.findAll();
+		List<TicketEntidad> parqueaderoEntidads = parqueaderoRepositorioJPA.findAll();
 		
 		assertTrue(parqueaderoEntidads.size()>0);
 		

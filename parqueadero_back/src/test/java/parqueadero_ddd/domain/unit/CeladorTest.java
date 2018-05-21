@@ -28,7 +28,7 @@ import parqueadero_ddd.domain.configuration.ParqueaderoConfiguracion;
 import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.exception.CalendarioException;
 import parqueadero_ddd.exception.CeladorException;
-import parqueadero_ddd.persistencia.repositorio.ParqueaderoRepositorio;
+import parqueadero_ddd.persistencia.repositorio.TicketRepositorio;
 import parqueadero_ddd.persistencia.repositorio.RestriccionPlacaRepositorio;
 
 @RunWith(SpringRunner.class)
@@ -46,7 +46,7 @@ public class CeladorTest {
 	private ParqueaderoConfiguracion parqueadero;
 	
 	@Mock
-	private ParqueaderoRepositorio parqueaderoRepositorio;
+	private TicketRepositorio parqueaderoRepositorio;
 	
 	@Mock
 	private RestriccionPlacaRepositorio restriccionPlacaRepositorio;
