@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgForm} from '@angular/forms';
 
 import { Vehiculo } from '../domain/vehiculo';
 import { Ticket } from '../domain/Ticket';
@@ -31,6 +32,7 @@ export class ParqueaderoComponent implements OnInit {
   esError: boolean = false;
   esTicket: boolean = false;
   tickets: Ticket[];
+  ingreso: NgForm;
 
   constructor(private parqueaderoService: ParqueaderoService,private modalService: NgbModal) { 
     
@@ -48,8 +50,7 @@ export class ParqueaderoComponent implements OnInit {
     });
   }
 
-  ingresar(){
-    console.log("En el metodo ingresar");
+  ingresar(ingresoForm: NgForm){
     this.parqueaderoService.realizarIngreso(this.vehiculo).then(data => {
       console.log(data);
       this.claseMensaje = SUCCESS;
@@ -57,6 +58,9 @@ export class ParqueaderoComponent implements OnInit {
       this.parqueadero = <Ticket> data;
       this.tickets.push(<Ticket>data);
       this.vehiculo = new Vehiculo;
+      console.log(ingresoForm);
+      ingresoForm.resetForm();
+      ingresoForm.reset();
     }, dataError => {
       console.log(dataError);
       this.esError = true;
