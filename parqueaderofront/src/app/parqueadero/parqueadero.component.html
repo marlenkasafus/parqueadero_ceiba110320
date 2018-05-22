@@ -80,7 +80,7 @@
           <td>{{ticket.vehiculo.tipoVehiculoEnum}}</td>
           <td>{{ticket.fechaIngreso | date:'dd/MM/yyyy hh:mm:ss'}}</td>
           <td>
-            <button type="button" class="btn btn-primary" (click)="solicitudRetiro(content,ticket.id)">Realizar retiro</button>
+            <button type="button" class="btn btn-primary" id="{{ticket.vehiculo.placa}}" (click)="solicitudRetiro(content,ticket.id)">Realizar retiro</button>
           </td>
         </tr>
       </tbody>
