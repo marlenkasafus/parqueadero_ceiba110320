@@ -20,7 +20,7 @@
       <br>
       <strong>Tipo vehiculo: {{parqueadero.vehiculo.tipoVehiculoEnum}}</strong>
       <br>
-      <strong>Fecha ingreso: {{parqueadero.fechaIngreso}}</strong>
+      <strong>Fecha ingreso: {{parqueadero.fechaIngreso | date: 'yyy-MM-d, h:mm a'}}</strong>
       <br>
     </div>
     <form name="ingreso" id="ingreso" #ingreso="ngForm">
@@ -78,7 +78,7 @@
         <tr *ngFor="let ticket of tickets">
           <td>{{ticket.vehiculo.placa | uppercase}}</td>
           <td>{{ticket.vehiculo.tipoVehiculoEnum}}</td>
-          <td>{{ticket.fechaIngreso | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+          <td>{{ticket.fechaIngreso | date: 'M/d/yy, h:mm a'}}</td>
           <td>
             <button type="button" class="btn btn-primary" id="{{ticket.vehiculo.placa}}" (click)="solicitudRetiro(content,ticket.id)">Realizar retiro</button>
           </td>
@@ -100,10 +100,10 @@
     <p>{{ticketSeleccionado.vehiculo.placa | uppercase}}</p>
     <br>
     <strong>Fecha ingreso: </strong>
-    <p>{{ticketSeleccionado.fechaIngreso | date:'dd/MM/yyyy hh:mm:ss'}}</p>
+    <p>{{ticketSeleccionado.fechaIngreso | date: 'yyy-MM-d, h:mm a'}}</p>
     <br>
     <strong>Fecha salida: </strong>
-    <p>{{ticketSeleccionado.fechaSalida | date:'dd/MM/yyyy hh:mm:ss'}}</p>
+    <p>{{ticketSeleccionado.fechaSalida | date: 'yyy-MM-d, h:mm a'}}</p>
     <br>
     <strong>Valor pagar: </strong>
     <p>{{ticketSeleccionado.valorPagar}}</p>

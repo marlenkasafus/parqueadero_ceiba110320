@@ -30,9 +30,7 @@ public class Vehiculo {
 
 	public String getPlaca() {
 		return placa;
-	}
-	
-	
+	}	
 
 	public int getCilindraje() {
 		return cilindraje;

@@ -10,11 +10,11 @@
             </div>
             <div class="col-md-4">
                 <strong>Valido desde: </strong>
-                <p>{{trmActual.validoDesde}}</p>
+                <p>{{trmActual.validoDesde | date: 'yyy-MM-d, h:mm a'}}</p>
             </div>
             <div class="col-md-4">
                 <strong>Valido hasta: </strong>
-                <p>{{trmActual.validoHasta}}</p>
+                <p>{{trmActual.validoHasta | date: 'yyy-MM-d, h:mm a'}}</p>
             </div>
           </div>
         </div>
