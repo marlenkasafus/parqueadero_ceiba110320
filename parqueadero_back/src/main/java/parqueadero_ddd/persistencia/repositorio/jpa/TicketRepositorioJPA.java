@@ -13,7 +13,7 @@ public interface TicketRepositorioJPA extends JpaRepository<TicketEntidad,Intege
 	@Query("select count(P) from TicketEntidad P where P.estado = :estado")
 	int countByEstado(@Param("estado") String estado);
 
-	@Query("select count(P) from TicketEntidad P where P.estado = :estado and P.vehiculo.tipo = :tipoVehiculo")
+	@Query("select count(P) from TicketEntidad P where P.estado = :estado and P.tipo = :tipoVehiculo")
 	int countByEstadoAndTipoVehiculo(@Param("estado") String estado, @Param("tipoVehiculo") String tipoVehiculo);
 
 	@Query("select P from TicketEntidad P where P.estado = :estado")

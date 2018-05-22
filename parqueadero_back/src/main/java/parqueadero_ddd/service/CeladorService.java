@@ -30,7 +30,7 @@ public class CeladorService {
 	private Calendario calendario;
 	
 	@RequestMapping(value="/ingreso",method=RequestMethod.POST)
-	public ResponseEntity<?> solicitudIngresoVehiculo(@RequestBody Vehiculo vehiculo){
+	public ResponseEntity<Object> solicitudIngresoVehiculo(@RequestBody Vehiculo vehiculo){
 		calendario.setFechaActual(LocalDateTime.now());
 		Ticket ticket;
 		try {
@@ -42,7 +42,7 @@ public class CeladorService {
 	}
 	
 	@RequestMapping(value="/retiro/solicitud",method=RequestMethod.GET)
-	public ResponseEntity<?> solicitudRetiroVehiculo(Ticket ticketRequest){
+	public ResponseEntity<Object> solicitudRetiroVehiculo(Ticket ticketRequest){
 		Ticket ticket;
 		try {
 			ticket = celador.solicitudRetiroVehiculo(ticketRequest, LocalDateTime.now());

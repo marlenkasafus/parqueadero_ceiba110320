@@ -21,7 +21,6 @@ import parqueadero_ddd.domain.enums.TipoVehiculoEnum;
 import parqueadero_ddd.exception.CalendarioException;
 import parqueadero_ddd.exception.CeladorException;
 import parqueadero_ddd.persistencia.entidad.TicketEntidad;
-import parqueadero_ddd.persistencia.entidad.VehiculoEntidad;
 import parqueadero_ddd.persistencia.repositorio.jpa.TicketRepositorioJPA;
 
 
@@ -40,12 +39,12 @@ public class CeladorNoDisponibilidadTest {
 	@Before
 	public void setup() {
 		for (int i = 0; i < 10; i++) {
-			TicketEntidad parqueaderoEntidad = new TicketEntidad(null, new VehiculoEntidad(TipoVehiculoEnum.CARRO.getCodigo(), "ASD123",0),EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now(),null,null);
+			TicketEntidad parqueaderoEntidad = new TicketEntidad(null, TipoVehiculoEnum.CARRO.getCodigo(), "ASD123",0,EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now(),null,null);
 			parqueaderoRepositorio.saveAndFlush(parqueaderoEntidad);			
 		}
 		
 		for (int i = 0; i < 5; i++) {
-			TicketEntidad parqueaderoEntidad = new TicketEntidad(null, new VehiculoEntidad(TipoVehiculoEnum.MOTO.getCodigo(), "ASD123",0),EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now(),null,null);
+			TicketEntidad parqueaderoEntidad = new TicketEntidad(null, TipoVehiculoEnum.MOTO.getCodigo(), "ASD123",0,EstadoParqueaderoEnum.OCUPADO.getCodigo(), LocalDateTime.now(),null,null);
 			parqueaderoRepositorio.saveAndFlush(parqueaderoEntidad);			
 		}
 	}

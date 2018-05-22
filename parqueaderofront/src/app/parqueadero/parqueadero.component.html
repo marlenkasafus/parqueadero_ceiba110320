@@ -23,24 +23,42 @@
       <strong>Fecha ingreso: {{parqueadero.fechaIngreso}}</strong>
       <br>
     </div>
-    <form name="ingreso" #ingreso id="ingreso">
+    <form name="ingreso" id="ingreso" #ingreso="ngForm">
       <div class="form-group">
         <label for="placa">Placa</label>
         <input type="text" class="form-control" id="placa" name="placa" required minlength="5" maxlength="6" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
-          #placa [(ngModel)]="vehiculo.placa">
+          #placa="ngModel" [(ngModel)]="vehiculo.placa">
+          <div *ngIf="placa.invalid && placa.dirty" class="alert alert-danger">
+            <div *ngIf="placa.errors.required">
+              La placa es necesaria.
+            </div>
+            <div *ngIf="placa.errors.minlength">
+            La placa debe tener minimo 5 caracteres.
+            </div>
+          </div>
       </div>
       <div class="form-group">
         <label for="tipoVehiculo">Tipo vehiculo</label>
-        <select class="form-control" id="tipoVehiculo" name="tipoVehiculo" required #vehiculo.tipoVehiculoEnum [(ngModel)]="vehiculo.tipoVehiculoEnum">
+        <select class="form-control" id="tipoVehiculo" name="tipoVehiculo" required #tipoVehiculo="ngModel" [(ngModel)]="vehiculo.tipoVehiculoEnum">
           <option *ngFor="let tipoVehiculo of tipoVehiculos" [value]="tipoVehiculo">{{tipoVehiculo}}</option>
         </select>
+        <div *ngIf="tipoVehiculo.invalid && tipoVehiculo.dirty" class="alert alert-danger">
+          <div *ngIf="tipoVehiculo.errors.required">
+            El tipo de vehiculo es necesario.
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="cilindraje">Cilindraje</label>
-        <input type="number" class="form-control" id="cilindraje" name="cilindraje" required minlength="2" maxlength="4" #vehiculo.cilindraje
+        <input type="number" class="form-control" id="cilindraje" name="cilindraje" required minlength="2" maxlength="4" #cilindraje="ngModel"
           [(ngModel)]="vehiculo.cilindraje">
+          <div *ngIf="cilindraje.invalid && cilindraje.dirty" class="alert alert-danger">
+            <div *ngIf="cilindraje.errors.required">
+              El cilindraje es necesario.
+            </div>
+          </div>
       </div>
-      <button type="button" class="btn btn-primary btn-block" (click)="ingresar()">Ingresar</button>
+      <button type="button" class="btn btn-primary btn-block" (click)="ingreso.valid && ingresar()">Ingresar</button>
     </form>
   </div>
   <div class="col-md-6">

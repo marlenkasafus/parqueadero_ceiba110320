@@ -16,16 +16,17 @@ public class TicketBuilder {
 	}
 
 	public static TicketEntidad convertirAParqueaderoEntidad(Ticket ticket) {
+		Vehiculo vehiculo = ticket.getVehiculo();
 		return new TicketEntidad(ticket.getId(),
-				VehiculoBuilder.convertirAVehiculoEntidad(ticket.getVehiculo()),
+				vehiculo.getTipoVehiculoEnum().getCodigo(), vehiculo.getPlaca(), vehiculo.getCilindraje(),
 				ticket.getEstadoParqueaderoEnum().getCodigo(), ticket.getFechaIngreso(),
 				ticket.getFechaSalida(), ticket.getValorPagar());
 	}
 
 	public static Ticket convertirAticket(TicketEntidad ticketEntidad) {
-		Vehiculo vehiculo = new Vehiculo(ticketEntidad.getVehiculo().getPlaca(),
-				TipoVehiculoEnum.getByCodigo(ticketEntidad.getVehiculo().getTipo()),
-				ticketEntidad.getVehiculo().getCilindraje());
+		Vehiculo vehiculo = new Vehiculo(ticketEntidad.getPlaca(),
+				TipoVehiculoEnum.getByCodigo(ticketEntidad.getTipo()),
+				ticketEntidad.getCilindraje());
 		return new Ticket(ticketEntidad.getId(), vehiculo, ticketEntidad.getFechaIngreso(),
 				ticketEntidad.getFechaSalida(), ticketEntidad.getValorPagar(),
 				EstadoParqueaderoEnum.getByCodigo(ticketEntidad.getEstado()));
