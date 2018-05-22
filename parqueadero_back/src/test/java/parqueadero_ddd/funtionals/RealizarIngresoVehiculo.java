@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +20,7 @@ public class RealizarIngresoVehiculo {
 	private WebDriver driver;
 	private StringBuffer verificationErrors = new StringBuffer();
 
+	@Ignore
 	@Before
 	public void setUp() throws Exception {
 		File file = new File("src/test/resources/");
@@ -28,6 +30,7 @@ public class RealizarIngresoVehiculo {
 		driver.get("http://localhost:4200/");
 	}
 
+	@Ignore
 	@Test
 	public void testUntitledTestCase() throws Exception {
 		driver.findElement(By.id("placa")).click();
@@ -44,7 +47,8 @@ public class RealizarIngresoVehiculo {
 		assertEquals("Placa: TRO549", driver.findElement(By.xpath("//app-parqueadero/div/div/div/strong")).getText());
 
 	}
-	
+
+	@Ignore
 	@Test
 	  public void testConsulta() throws Exception {
 	    driver.get("http://localhost:4200/");
@@ -54,6 +58,7 @@ public class RealizarIngresoVehiculo {
 	    assertEquals("Retiro exitoso", driver.findElement(By.xpath("//ngb-modal-window/div/div/div[2]/strong")).getText());
 	  }
 
+	@Ignore
 	@After
 	public void tearDown() throws Exception {
 		driver.quit();
