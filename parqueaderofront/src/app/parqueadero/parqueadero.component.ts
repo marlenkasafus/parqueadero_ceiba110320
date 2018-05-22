@@ -51,26 +51,38 @@ export class ParqueaderoComponent implements OnInit {
   }
 
   ingresar(ingresoForm: NgForm){
-    this.parqueaderoService.realizarIngreso(this.vehiculo).then(data => {
-      console.log(data);
-      this.claseMensaje = SUCCESS;
-      this.esTicket = true;
-      this.parqueadero = <Ticket> data;
-      this.tickets.push(<Ticket>data);
-      this.vehiculo = new Vehiculo;
-      console.log(ingresoForm);
-      ingresoForm.resetForm();
-      ingresoForm.reset();
-    }, dataError => {
-      console.log(dataError);
+    console.log(this.validarVehiculoEnVehiculosActuales(this.vehiculo));
+    if(this.validarVehiculoEnVehiculosActuales(this.vehiculo)){
+      this.claseMensaje = WARNING;
+      this.mensaje = "El vehiculo ya se encuentra en el parqueadero, primero ejecute el registro de salida.";
       this.esError = true;
-      this.mensaje = dataError.error;
-      if (dataError.status == 406) {
-        this.claseMensaje = WARNING;
-      }else{
-        this.claseMensaje = ERROR;
-      }
-    })
+    }else{
+      this.parqueaderoService.realizarIngreso(this.vehiculo).then(data => {
+        this.esError = false;
+        console.log(data);
+        this.claseMensaje = SUCCESS;
+        this.esTicket = true;
+        this.parqueadero = <Ticket> data;
+        this.tickets.push(<Ticket>data);
+        this.vehiculo = new Vehiculo;
+        console.log(ingresoForm);
+        ingresoForm.resetForm();
+        ingresoForm.reset();
+      }, dataError => {
+        console.log(dataError);
+        this.esError = true;
+        this.mensaje = dataError.error;
+        if (dataError.status == 406) {
+          this.claseMensaje = WARNING;
+        }else{
+          this.claseMensaje = ERROR;
+        }
+      })
+    }
+  }
+
+  validarVehiculoEnVehiculosActuales(vehiculo: Vehiculo) {
+    return this.tickets.some(ticket => ticket.vehiculo.placa === vehiculo.placa); 
   }
 
   confirmarRetiro(ticket: Ticket){
@@ -86,6 +98,11 @@ export class ParqueaderoComponent implements OnInit {
       this.tickets = <Ticket[]>tickets;
     })
   }
+
+  cerrarAlerta(alerta){
+    alerta = false;
+  }
+
   private getTiposVehiculos(): void {
     this.parqueaderoService.getTipoVehiculos().subscribe(tipoVehiculos => this.tipoVehiculos = tipoVehiculos);
   }
