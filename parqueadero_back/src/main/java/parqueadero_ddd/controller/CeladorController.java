@@ -1,4 +1,4 @@
-package parqueadero_ddd.service;
+package parqueadero_ddd.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,7 +21,7 @@ import parqueadero_ddd.exception.CeladorException;
 @RestController
 @RequestMapping("/celador")
 @CrossOrigin
-public class CeladorService {
+public class CeladorController {
 	
 	@Autowired
 	private Celador celador;

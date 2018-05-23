@@ -1,4 +1,4 @@
-package parqueadero_ddd.service;
+package parqueadero_ddd.controller;
 
 import java.rmi.RemoteException;
 
@@ -16,7 +16,7 @@ import parqueadero_ddd.persistencia.repositorio.TcrmRepositorio;
 @RestController
 @RequestMapping("/TCRMService")
 @CrossOrigin
-public class TasaRepresentaticaMercadoService {
+public class TasaRepresentaticaMercadoController {
 	
 	@Autowired
 	private TcrmRepositorio tcrmRepositorio;
