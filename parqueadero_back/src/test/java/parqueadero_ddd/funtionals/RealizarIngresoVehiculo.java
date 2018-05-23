@@ -49,8 +49,7 @@ public class RealizarIngresoVehiculo {
 	  public void testConsulta() throws Exception {
 	    driver.get("http://localhost:4200/");
 	    driver.findElement(By.id("TRO549")).click();
-	    driver.findElement(By.xpath("(//button[@type='button'])[23]")).click();
-	    driver.findElement(By.xpath("//ngb-modal-window/div/div/div[2]")).click();
+	    driver.findElement(By.id("retirarVehiculo")).click();
 	    assertEquals("Retiro exitoso", driver.findElement(By.xpath("//ngb-modal-window/div/div/div[2]/strong")).getText());
 	  }
 

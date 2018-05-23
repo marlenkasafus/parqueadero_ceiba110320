@@ -112,7 +112,7 @@
     <strong>Retiro exitoso</strong>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" *ngIf="ticketSeleccionado" (click)="confirmarRetiro(ticketSeleccionado)">Confirmar Retiro</button>
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Cerrar</button>
+    <button type="button" id="retirarVehiculo" class="btn btn-primary" *ngIf="ticketSeleccionado" (click)="confirmarRetiro(ticketSeleccionado)">Confirmar Retiro</button>
+    <button type="button" id="cerrarModal" class="btn btn-light" (click)="c('Close click')">Cerrar</button>
   </div>
 </ng-template>
